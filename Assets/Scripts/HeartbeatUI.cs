@@ -2,6 +2,8 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Splines.Interpolators;
 using UnityEngine.UI;
 
@@ -12,12 +14,16 @@ public class HeartbeatUI : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Toggle toggle;
     [SerializeField] private AudioSource sound;
+    [SerializeField] private Volume volume;
+    private Vignette vignette;
     private float bpm;
     private float progress;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        volume.profile.TryGet(out vignette);
         bpm = slider.value;
+        vignette.intensity.overrideState = true;
         StartCoroutine(Heartbeat());
     }
 
@@ -26,6 +32,7 @@ public class HeartbeatUI : MonoBehaviour
     {
         text.text = "BPM: " + bpm;
         bpm = slider.value;
+        vignette.intensity.value = Mathf.Lerp(0, 0.5f, bpm / 160);
     }
 
     IEnumerator Heartbeat()
