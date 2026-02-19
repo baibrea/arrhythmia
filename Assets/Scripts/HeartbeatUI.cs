@@ -53,7 +53,7 @@ public class HeartbeatUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "BPM: " + bpm;
+        text.text = "BPM: " + bpm + " Progress: " + progress;
         bpm = slider.value;
         vignette.intensity.value = Mathf.Lerp(0, 0.5f, bpm / 160);
         left1.transform.localPosition = new Vector3(left.transform.localPosition.x - 250, 0, 0);
@@ -78,7 +78,7 @@ public class HeartbeatUI : MonoBehaviour
         {
             yield return null;
             timer -= Time.deltaTime;
-            progress = timer / interval;
+            progress = Mathf.Round((timer / interval) * 100f) / 100f;
             left.transform.localPosition = Vector3.Lerp(new Vector3(-250, 0, 0), Vector3.zero, 1 - progress);
             right.transform.localPosition = Vector3.Lerp(new Vector3(250, 0, 0), Vector3.zero, 1 - progress);
             leftImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left.transform.localPosition.x / 750));
@@ -87,9 +87,13 @@ public class HeartbeatUI : MonoBehaviour
             right1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right1.transform.localPosition.x / 750));
             left2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left2.transform.localPosition.x / 750));
             right2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right2.transform.localPosition.x / 750));
-            if (toggle.isOn && progress <= 0.3f)
+            if (toggle.isOn && (progress <= 0.15f || progress >= 0.85f))
             {
                 heart.color = Color.green;
+            }
+            else
+            {
+                heart.color = Color.white;
             }
         }
         UpdateQueue();
