@@ -329,6 +329,8 @@ RectTransform:
   - {fileID: 1916296772}
   - {fileID: 362469943}
   - {fileID: 1592238882}
+  - {fileID: 1174075838}
+  - {fileID: 2017828332515290892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -371,7 +373,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &153167202
 MonoBehaviour:
@@ -393,7 +395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 251094498, guid: 1e272f8a2428fe14ba983282632e3716, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3c45e74402d0af4bb6522368db139b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -711,7 +713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &362469943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1305,7 +1307,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1000, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &856781902
 MonoBehaviour:
@@ -1327,7 +1329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 271102544, guid: 2f72a05c0a68d0141b86c70bc1526307, type: 3}
+  m_Sprite: {fileID: -393615398, guid: b12d6621c2dd396468703357602da5ff, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1575,8 +1577,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1174075837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,7 +1652,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174075837}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &1218388422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,7 +1687,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1000, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1218388424
 MonoBehaviour:
@@ -1710,7 +1709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1851408747, guid: 2f72a05c0a68d0141b86c70bc1526307, type: 3}
+  m_Sprite: {fileID: -1640173805, guid: b12d6621c2dd396468703357602da5ff, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2723,6 +2722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   heartbeat: {fileID: 2015570646}
   cameraShake: {fileID: 1548982531}
+  gridManager: {fileID: 2080224531}
   indicator: {fileID: 362469944}
   threshold: 0.3
   asset: {fileID: -944628639613478452, guid: 8fc7c8686a8b6b34cbab53d8d8cd2f61, type: 3}
@@ -3466,7 +3466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeartbeatUI
   text: {fileID: 1916296773}
-  heart: {fileID: 153167202}
+  heartObject: {fileID: 153167200}
   slider: {fileID: 1784500404}
   toggle: {fileID: 1592238883}
   sound: {fileID: 2015570647}
@@ -3570,8 +3570,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-<<<<<<< Updated upstream
-=======
+--- !u!1 &2080224530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2080224532}
+  - component: {fileID: 2080224531}
+  m_Layer: 0
+  m_Name: Grid Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2080224531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080224530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb477496767d514682a0042eeaa153d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!4 &2080224532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080224530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.76977, y: 1.63894, z: 1.24165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &76512820782636234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4448,7 +4490,6 @@ RectTransform:
   m_AnchoredPosition: {x: 69, y: -414}
   m_SizeDelta: {x: 1350, y: 470}
   m_Pivot: {x: 0.5, y: 0.5}
->>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4462,3 +4503,4 @@ SceneRoots:
   - {fileID: 978652011}
   - {fileID: 1548982530}
   - {fileID: 448781886}
+  - {fileID: 2080224532}

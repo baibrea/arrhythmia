@@ -10,13 +10,14 @@ using UnityEngine.UI;
 public class HeartbeatUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private Image heart;
+    [SerializeField] private GameObject heartObject;
     [SerializeField] private Slider slider;
     [SerializeField] private Toggle toggle;
     [SerializeField] private AudioSource sound;
     [SerializeField] private Volume volume;
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
+    private Image heart;
     private GameObject left1;
     private GameObject right1;
     private GameObject left2;
@@ -27,6 +28,7 @@ public class HeartbeatUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        heart = heartObject.GetComponent<Image>();
         volume.profile.TryGet(out vignette);
         bpm = slider.value;
         vignette.intensity.overrideState = true;
@@ -56,10 +58,10 @@ public class HeartbeatUI : MonoBehaviour
         text.text = "BPM: " + bpm + " Progress: " + progress;
         bpm = slider.value;
         vignette.intensity.value = Mathf.Lerp(0, 0.5f, bpm / 160);
-        left1.transform.localPosition = new Vector3(left.transform.localPosition.x - 250, 0, 0);
-        left2.transform.localPosition = new Vector3(left.transform.localPosition.x - 500, 0, 0);
-        right1.transform.localPosition = new Vector3(right.transform.localPosition.x + 250, 0, 0);
-        right2.transform.localPosition = new Vector3(right.transform.localPosition.x + 500, 0, 0);
+        left1.transform.localPosition = new Vector3(left.transform.localPosition.x - 150, 0, 0);
+        left2.transform.localPosition = new Vector3(left.transform.localPosition.x - 300, 0, 0);
+        right1.transform.localPosition = new Vector3(right.transform.localPosition.x + 150, 0, 0);
+        right2.transform.localPosition = new Vector3(right.transform.localPosition.x + 300, 0, 0);
     }
 
     IEnumerator Heartbeat()
@@ -79,14 +81,14 @@ public class HeartbeatUI : MonoBehaviour
             yield return null;
             timer -= Time.deltaTime;
             progress = Mathf.Round((timer / interval) * 100f) / 100f;
-            left.transform.localPosition = Vector3.Lerp(new Vector3(-250, 0, 0), Vector3.zero, 1 - progress);
-            right.transform.localPosition = Vector3.Lerp(new Vector3(250, 0, 0), Vector3.zero, 1 - progress);
-            leftImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left.transform.localPosition.x / 750));
-            rightImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right.transform.localPosition.x / 750));
-            left1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left1.transform.localPosition.x / 750));
-            right1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right1.transform.localPosition.x / 750));
-            left2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left2.transform.localPosition.x / 750));
-            right2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right2.transform.localPosition.x / 750));
+            left.transform.localPosition = Vector3.Lerp(new Vector3(-150, 0, 0), Vector3.zero, 1 - progress);
+            right.transform.localPosition = Vector3.Lerp(new Vector3(150, 0, 0), Vector3.zero, 1 - progress);
+            leftImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left.transform.localPosition.x / 450));
+            rightImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right.transform.localPosition.x / 450));
+            left1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left1.transform.localPosition.x / 450));
+            right1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right1.transform.localPosition.x / 450));
+            left2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left2.transform.localPosition.x / 450));
+            right2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right2.transform.localPosition.x / 450));
             if (toggle.isOn && (progress <= 0.15f || progress >= 0.85f))
             {
                 heart.color = Color.green;
@@ -97,7 +99,52 @@ public class HeartbeatUI : MonoBehaviour
             }
         }
         UpdateQueue();
+        StartCoroutine(Pulse(interval * 0.1f));
         StartCoroutine(Heartbeat());
+    }
+
+    IEnumerator Pulse(float time)
+    {
+        float timer = time;
+        Transform heartTransform = heart.transform;
+
+        float endTime = time * 0.7f;
+        float duration = time - endTime;
+        while (timer > endTime)
+        {
+            float t = 1 - (timer - endTime) / duration;
+            heartTransform.localScale = Vector3.one * Mathf.Lerp(1, 1.35f, t);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        endTime = time * 0.5f;
+        duration = time - endTime;
+        while (timer > endTime)
+        {
+            float t = 1 - (timer - endTime) / duration;
+            heartTransform.localScale = Vector3.one * Mathf.Lerp(1.35f, 1.1f, t);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        endTime = time * 0.3f;
+        duration = time - endTime;
+        while (timer > endTime)
+        {
+            float t = 1 - (timer - endTime) / duration;
+            heartTransform.localScale = Vector3.one * Mathf.Lerp(1.1f, 1.25f, t);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        endTime = 0;
+        duration = time - endTime;
+        while (timer > endTime)
+        {
+            float t = 1 - (timer - endTime) / duration;
+            heartTransform.localScale = Vector3.one * Mathf.Lerp(1.25f, 1f, t);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        heartTransform.localScale = Vector3.one;
     }
 
     IEnumerator MoveOutlines()
