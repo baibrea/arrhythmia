@@ -6,12 +6,16 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private HeartbeatUI heartbeat;
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private GridManager gridManager;
     [SerializeField] private TextMeshProUGUI indicator;
+    [SerializeField] private float threshold = 0.2f;
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
     private Vector2 direction;
     private float speed;
+    private (int, int) position;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,17 +45,27 @@ public class PlayerMove : MonoBehaviour
             direction = move.ReadValue<Vector2>();
             yield return null;
         }
-        if (heartbeat.getProgress() <= 0.3f && (direction.x == 0 || direction.y == 0))
+        if (
+            (heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f)
+            && (direction.x == 0 || direction.y == 0)
+            )
         {
             Vector3 target = new Vector3(transform.position.x + direction.x * 5, transform.position.y, transform.position.z + direction.y * 5);
             transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
-            indicator.text = "MOVE SUCCESS";
-            indicator.color = Color.green;
+            if (indicator != null)
+            {
+                indicator.text = "MOVE SUCCESS";
+                indicator.color = Color.green;
+            }
         }
         else
         {
-            indicator.text = "MOVE FAIL";
-            indicator.color = Color.red;
+            if (indicator != null) 
+            {
+                indicator.text = "MOVE FAIL";
+                indicator.color = Color.red;
+            }
+            cameraShake.ShakeCamera();
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
