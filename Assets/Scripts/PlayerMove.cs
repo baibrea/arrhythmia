@@ -90,7 +90,12 @@ public class PlayerMove : MonoBehaviour
                 indicator.text = "MOVE FAIL";
                 indicator.color = Color.red;
             }
-            cameraShake.ShakeCamera();
+            // Increase BPM
+            if (heartbeat.getBPM() < 160) 
+            {
+                heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
+                cameraShake.ShakeCamera();
+            }
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
