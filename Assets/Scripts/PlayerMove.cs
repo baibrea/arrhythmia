@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     private float lastProgress;
     private bool playerInputted = false;
     private bool firstBeat = true;
+    private bool currBeatFailed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -96,6 +97,7 @@ public class PlayerMove : MonoBehaviour
                 heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
                 cameraShake.ShakeCamera();
             }
+            currBeatFailed = true;
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
@@ -115,7 +117,7 @@ public class PlayerMove : MonoBehaviour
                 lastProgress = heartbeat.getProgress();
                 return;
             }
-            if (!playerInputted) 
+            if (!playerInputted && !currBeatFailed) 
             {
                 // Increase BPM
                 if (heartbeat.getBPM() < 160) 
@@ -125,6 +127,7 @@ public class PlayerMove : MonoBehaviour
                 }
             }
             playerInputted = false;
+            currBeatFailed = false;
         }
         lastProgress = currentProgress;
     }
