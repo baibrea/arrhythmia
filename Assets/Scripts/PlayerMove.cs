@@ -11,12 +11,17 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private GridManager grid;
     [SerializeField] private TextMeshProUGUI indicator;
     [SerializeField] private float threshold = 0.2f;
+    [SerializeField] private float increaseAmount = 5f;
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
     private Vector2 direction;
     private float speed;
     private (int, int) position = (0, 0);
+    private float lastProgress;
+    private bool playerInputted = false;
+    private bool firstBeat = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         speed = 120 / heartbeat.getBPM();
+        checkMiss();
     }
 
     IEnumerator Move()
@@ -74,6 +80,8 @@ public class PlayerMove : MonoBehaviour
                 indicator.text = "MOVE SUCCESS";
                 indicator.color = Color.green;
             }
+
+            playerInputted = true;
         }
         else
         {
@@ -86,6 +94,34 @@ public class PlayerMove : MonoBehaviour
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
+    }
+
+    // Checks if the player missed a beat
+    void checkMiss() 
+    {
+        float currentProgress = heartbeat.getProgress();
+
+        // When beat threshold ends, checks if player inputted
+        if (currentProgress < (1 - threshold / 2f) && lastProgress >= ( 1 - threshold / 2f)) 
+        {   
+            if (firstBeat) 
+            {
+                firstBeat = false;
+                lastProgress = heartbeat.getProgress();
+                return;
+            }
+            if (!playerInputted) 
+            {
+                // Increase BPM
+                if (heartbeat.getBPM() < 160) 
+                {
+                    heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
+                    cameraShake.ShakeCamera();
+                }
+            }
+            playerInputted = false;
+        }
+        lastProgress = currentProgress;
     }
 
 }
