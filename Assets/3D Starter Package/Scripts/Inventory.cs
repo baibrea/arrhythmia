@@ -143,18 +143,65 @@ namespace DigitalWorlds.StarterPackage3D
             AddItemToUI(itemData);
         }
 
+        // private void AddItemToUI(ItemData itemData)
+        // {
+        //     if (layoutGroup == null)
+        //     {
+        //         // Don't add to the UI if the layout group is not assigned
+        //         return;
+        //     }
+
+        //     GameObject newItem = new(itemData.name);
+        //     newItem.AddComponent<Image>().sprite = itemData.sprite;
+        //     newItem.transform.SetParent(layoutGroup.transform, false);
+        //     newItem.transform.localScale = Vector3.one;
+        // }
+
+        // private void AddItemToUI(ItemData itemData)
+        // {
+        //     if (layoutGroup == null)
+        //     {
+        //         return;
+        //     }
+
+        //     // Create UI object
+        //     GameObject newItem = new GameObject(itemData.name);
+
+        //     // IMPORTANT: use false so it respects layout settings
+        //     newItem.transform.SetParent(layoutGroup.transform, false);
+
+        //     // Add Image component
+        //     Image image = newItem.AddComponent<Image>();
+        //     image.sprite = itemData.sprite;
+        //     image.preserveAspect = true;
+
+        //     // Add AspectRatioFitter so width scales with height
+        //     AspectRatioFitter fitter = newItem.AddComponent<AspectRatioFitter>();
+        //     fitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+
+        //     // Optional but recommended: ensure it has a RectTransform
+        //     RectTransform rect = newItem.GetComponent<RectTransform>();
+        //     rect.localScale = Vector3.one;
+        // }
+
         private void AddItemToUI(ItemData itemData)
         {
             if (layoutGroup == null)
-            {
-                // Don't add to the UI if the layout group is not assigned
                 return;
-            }
 
-            GameObject newItem = new(itemData.name);
-            newItem.AddComponent<Image>().sprite = itemData.sprite;
-            newItem.transform.SetParent(layoutGroup.transform);
-            newItem.transform.localScale = Vector3.one;
+            GameObject newItem = new GameObject(itemData.name);
+            newItem.transform.SetParent(layoutGroup.transform, false);
+
+            Image image = newItem.AddComponent<Image>();
+            image.sprite = itemData.sprite;
+            image.preserveAspect = true;
+
+            RectTransform rect = newItem.GetComponent<RectTransform>();
+
+            // Make key height match container height
+            float containerHeight = layoutGroup.GetComponent<RectTransform>().rect.height;
+
+            rect.sizeDelta = new Vector2(containerHeight, containerHeight);
         }
 
         // Delete an item from the inventory and layout group, given its name
