@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     InputAction move;
     private Vector2 direction;
     private float speed;
+    private Inventory inventory;
     private (int, int) position = (0, 0);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +25,8 @@ public class PlayerMove : MonoBehaviour
         inputActions = asset.FindActionMap("Move");
         move = inputActions.FindAction("WASD");
         inputActions.Enable();
+
+        inventory = FindObjectOfType<Inventory>();
 
         StartCoroutine(Move());
     }
@@ -64,7 +67,7 @@ public class PlayerMove : MonoBehaviour
                     Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
                     if (door != null)
                     {
-                        door.TryUnlock(FindObjectOfType<Inventory>());
+                        door.TryUnlock(inventory, direction);
                     }
                 }
             }
@@ -82,7 +85,7 @@ public class PlayerMove : MonoBehaviour
                     Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
                     if (door != null)
                     {
-                        door.TryUnlock(FindObjectOfType<Inventory>());
+                        door.TryUnlock(inventory, direction);
                     }
                 }
             }

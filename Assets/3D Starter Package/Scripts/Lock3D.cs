@@ -39,12 +39,18 @@ namespace DigitalWorlds.StarterPackage3D
         [SerializeField] private int gridX;
         [SerializeField] private int gridY;
         [SerializeField] private GridManager gridManager;
-        private bool isUnlocked = false;
+
+
+        [Header("Door Settings")]
+
+        [SerializeField] private Facing playerEntersFrom;
 
         [Space(20)]
         [Header("Events")]
         [SerializeField] private UnityEvent onUnlocked, onUnlockFailed;
 
+        private bool isUnlocked = false;
+        public enum Facing { North, South, East, West };
         private Inventory inventory;
 
         // Start() registers the door in the gridManager's doors dictionary
@@ -151,14 +157,32 @@ namespace DigitalWorlds.StarterPackage3D
         }
 
         // TryUnlock() is a simple unlock method that can be called to try unlocking the door, such as GridManager.cs
-        public void TryUnlock(Inventory inv)
+        public void TryUnlock(Inventory inv, Vector2 playerDirection)
         {
-            if (isUnlocked || inv == null)
+            if (isUnlocked || inv == null || !isCorrectSide(playerDirection))
             {
                 return;
             }
             inventory = inv;
             CheckUnlock();
+        }
+
+        // Checks if the player is on the right side of the door to unlock it, according to the playerEntersFrom variable
+        private bool isCorrectSide(Vector2 playerDirection)
+        {
+            switch (playerEntersFrom)
+            {
+                case Facing.North:
+                    return playerDirection.y < 0;
+                case Facing.South:
+                    return playerDirection.y > 0;
+                case Facing.East:
+                    return playerDirection.x < 0;
+                case Facing.West:
+                    return playerDirection.x > 0;
+                default:
+                    return false;
+            }
         }
     }
 }
