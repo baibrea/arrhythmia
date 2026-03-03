@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
+    InputAction idle;
     private Vector2 direction;
     private float speed;
     private (int, int) position = (0, 0);
@@ -28,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     {
         inputActions = asset.FindActionMap("Move");
         move = inputActions.FindAction("WASD");
+        idle = inputActions.FindAction("Idle");
         inputActions.Enable();
 
         StartCoroutine(Move());
@@ -43,46 +45,63 @@ public class PlayerMove : MonoBehaviour
     IEnumerator Move()
     {
         direction = move.ReadValue<Vector2>();
+        bool idlePressed = false;
+
         while (direction != Vector2.zero)
         {
             direction = move.ReadValue<Vector2>();
             yield return null;
         }
-        while (direction == Vector2.zero)
+        while (direction == Vector2.zero && !idlePressed)
         {
             direction = move.ReadValue<Vector2>();
+            idlePressed = idle.WasPressedThisFrame();
             yield return null;
         }
         if (
             (heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f))
         {
-            if (direction.y != 0)
+            // Check for idle
+            if (idlePressed)
             {
-                int sign = (int) Mathf.Sign(direction.y);
-                if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 1)
+                if (indicator != null)
                 {
-                    Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
-                    transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
-                    position = (position.Item1, position.Item2 + 1 * sign);
+                    indicator.text = "IDLE SUCCESS";
+                    indicator.color = Color.yellow;
                 }
-            } else if (direction.x != 0)
+
+                playerInputted = true;
+            }
+            // Move player
+            else
             {
-                int sign = (int)Mathf.Sign(direction.x);
-                if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 1)
+                if (direction.y != 0)
                 {
-                    Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
-                    transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
-                    position = (position.Item1 + 1 * sign, position.Item2);
+                    int sign = (int) Mathf.Sign(direction.y);
+                    if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 1)
+                    {
+                        Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
+                        transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
+                        position = (position.Item1, position.Item2 + 1 * sign);
+                    }
+                } else if (direction.x != 0)
+                {
+                    int sign = (int)Mathf.Sign(direction.x);
+                    if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 1)
+                    {
+                        Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
+                        transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
+                        position = (position.Item1 + 1 * sign, position.Item2);
+                    }
                 }
-            }
+                if (indicator != null)
+                {
+                    indicator.text = "MOVE SUCCESS";
+                    indicator.color = Color.green;
+                }
 
-            if (indicator != null)
-            {
-                indicator.text = "MOVE SUCCESS";
-                indicator.color = Color.green;
+                playerInputted = true;
             }
-
-            playerInputted = true;
         }
         else
         {
@@ -103,12 +122,12 @@ public class PlayerMove : MonoBehaviour
         StartCoroutine(Move());
     }
 
-    // Checks if the player missed a beat
+    // Check if the player missed a beat
     void checkMiss() 
     {
         float currentProgress = heartbeat.getProgress();
-
-        // When beat threshold ends, checks if player inputted
+       
+        // When the beat threshold ends, checks if the player inputted
         if (currentProgress < (1 - threshold / 2f) && lastProgress >= ( 1 - threshold / 2f)) 
         {   
             if (firstBeat) 
