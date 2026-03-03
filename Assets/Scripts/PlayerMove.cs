@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
             if (direction.y != 0)
             {
                 int sign = (int) Mathf.Sign(direction.y);
-                if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 1)
+                if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "floor")
                 {
                     Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
                     transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
@@ -61,7 +61,7 @@ public class PlayerMove : MonoBehaviour
             } else if (direction.x != 0)
             {
                 int sign = (int)Mathf.Sign(direction.x);
-                if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 1)
+                if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "floor")
                 {
                     Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
                     transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
