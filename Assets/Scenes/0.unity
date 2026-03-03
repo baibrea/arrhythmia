@@ -675,7 +675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &362469943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2113,6 +2113,7 @@ MonoBehaviour:
   grid: {fileID: 2080224531}
   indicator: {fileID: 362469944}
   threshold: 0.3
+  increaseAmount: 5
   asset: {fileID: -944628639613478452, guid: 8fc7c8686a8b6b34cbab53d8d8cd2f61, type: 3}
 --- !u!1 &1762384774
 GameObject:
