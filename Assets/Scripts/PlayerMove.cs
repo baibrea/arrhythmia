@@ -62,6 +62,7 @@ public class PlayerMove : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                     position = (position.Item1, position.Item2 + 1 * sign);
                 }
+                // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
                 else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 2)
                 {
                     Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
@@ -80,6 +81,7 @@ public class PlayerMove : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                     position = (position.Item1 + 1 * sign, position.Item2);
                 }
+                // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
                 else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 2)
                 {
                     Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);

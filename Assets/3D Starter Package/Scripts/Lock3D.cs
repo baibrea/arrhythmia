@@ -40,6 +40,7 @@ namespace DigitalWorlds.StarterPackage3D
         [SerializeField] private int gridY;
         [SerializeField] private GridManager gridManager;
 
+        // Info to check which side the player is on when trying to unlock the door, and only allow unlocking from that side
 
         [Header("Door Settings")]
 
