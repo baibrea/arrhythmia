@@ -1,18 +1,45 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DigitalWorlds.StarterPackage3D;
 
 public class GridManager : MonoBehaviour
 {
+    [Header("Grid Settings")]
     [SerializeField] private GameObject space1;
     [SerializeField] private GameObject space2;
     [SerializeField] private GameObject parent;
     public Grid gridObject;
+
+    [Header("Door Settings")]
+    public Dictionary<(int, int), Lock3D> doors = new Dictionary<(int, int), Lock3D>();
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         gridObject = new Grid(space1, space2, parent);
         gridObject.CreateFloorBox(-2, -2, 2, 2);
+    }
+
+    // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
+    public void RegisterDoor(int x, int y, Lock3D door)
+    {
+        gridObject.SetSpace(x, y, 2);
+        doors[(x, y)] = door;
+    }
+
+    // CheckDoor() returns the Lock3D object at the x and y coordinates if it exists
+    // otherwise returns null
+    public Lock3D CheckDoor(int x, int y)
+    {
+        if (doors.ContainsKey((x, y)))
+        {
+            return doors[(x, y)];
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 
@@ -24,7 +51,7 @@ public class Grid
     Value is a number representing the grid type:
         0 or if key doesn't exist = wall (not traversable by player)
         1 = floor (traversable by player)
-        2 = ...
+        2 = locked door (traversable if player has key, otherwise wall)
         3 = ...
     */
     private Dictionary<(int, int), int> grid;
@@ -57,7 +84,7 @@ public class Grid
         grid[(x, y)] = type;
     }
 
-    public void CreateFloorBox(int x1, int y1, int x2, int y2) 
+    public void CreateFloorBox(int x1, int y1, int x2, int y2)
     {
         for (int i = x1; i <= x2; i++)
         {
@@ -67,12 +94,12 @@ public class Grid
                 if ((i + j) % 2 == 0)
                 {
                     GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                } else
+                }
+                else
                 {
                     GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
                 }
             }
         }
     }
-
 }
