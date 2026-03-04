@@ -23,7 +23,7 @@ public class HeartbeatUI : MonoBehaviour
     private GameObject left2;
     private GameObject right2;
     private Vignette vignette;
-    private float bpm;
+    private float bpm = 60f;
     private float progress;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,7 +56,6 @@ public class HeartbeatUI : MonoBehaviour
     void Update()
     {
         text.text = "BPM: " + bpm + " Progress: " + progress;
-        bpm = slider.value;
         vignette.intensity.value = Mathf.Lerp(0, 0.5f, bpm / 160);
         left1.transform.localPosition = new Vector3(left.transform.localPosition.x - 150, 0, 0);
         left2.transform.localPosition = new Vector3(left.transform.localPosition.x - 300, 0, 0);
@@ -160,19 +159,26 @@ public class HeartbeatUI : MonoBehaviour
         Destroy(leftCopy);
         Destroy(rightCopy);
     }
+
     IEnumerator HeartbeatSound(float time)
     {
         yield return new WaitForSeconds(time - time * 0.25f);
         sound.pitch = Mathf.Lerp(0, 2, bpm / 200);
         sound.PlayOneShot(sound.clip, 2);
     }
+
     public float getProgress()
     {
         return progress;
     }
+
     public float getBPM()
     {
         return bpm;
     }
 
+    public void setBPM(float value) 
+    {
+        bpm = value;
+    }
 }
