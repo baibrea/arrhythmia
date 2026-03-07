@@ -11,7 +11,6 @@ public class HeartbeatUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private GameObject heartObject;
-    [SerializeField] private Slider slider;
     [SerializeField] private Toggle toggle;
     [SerializeField] private AudioSource sound;
     [SerializeField] private Volume volume;
@@ -30,7 +29,6 @@ public class HeartbeatUI : MonoBehaviour
     {
         heart = heartObject.GetComponent<Image>();
         volume.profile.TryGet(out vignette);
-        bpm = slider.value;
         vignette.intensity.overrideState = true;
         left1 = Instantiate(left, gameObject.transform);
         left2 = Instantiate(left, gameObject.transform);

@@ -21,13 +21,13 @@ public class Grid
 {
     /* 
     Key is a pair representing the xy coordinate of the grid space
-    Value is a number representing the grid type:
-        0 or if key doesn't exist = wall (not traversable by player)
-        1 = floor (traversable by player)
-        2 = ...
-        3 = ...
+    Value is a string representing the grid type:
+        wall (not traversable by player)
+        (traversable by player)
+        door...
+        etc...
     */
-    private Dictionary<(int, int), int> grid;
+    private Dictionary<(int, int), String> grid;
     private GameObject space1;
     private GameObject space2;
     private GameObject parent;
@@ -37,22 +37,21 @@ public class Grid
         this.space1 = space1;
         this.space2 = space2;
         this.parent = parent;
-        this.grid = new Dictionary<(int, int), int>();
+        this.grid = new Dictionary<(int, int), String>();
     }
 
-    public int CheckSpace(int x, int y)
+    public String CheckSpace(int x, int y)
     {
         if (grid.ContainsKey((x, y)))
         {
             return grid[(x, y)];
         }
-        else
-        {
-            return 0;
+        else {
+            return "wall";
         }
     }
 
-    public void SetSpace(int x, int y, int type)
+    public void SetSpace(int x, int y, String type)
     {
         grid[(x, y)] = type;
     }
@@ -63,7 +62,7 @@ public class Grid
         {
             for (int j = y1; j <= y2; j++)
             {
-                grid[(i, j)] = 1;
+                grid[(i, j)] = "floor";
                 if ((i + j) % 2 == 0)
                 {
                     GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
