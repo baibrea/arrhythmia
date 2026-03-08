@@ -1,0 +1,3 @@
+[NAME=Player][SPEAKERSPRITE=Player] Where am I?
+[NAME=Player][SPEAKERSPRITE=Player] Is this my room?
+[NAME=Player][SPEAKERSPRITE=Player] How do I get out of here?

@@ -23,6 +23,10 @@ namespace DigitalWorlds.Dialogue
             public UnityEvent onDialogueBegan, onDialogueEnded;
         }
 
+        [Header("Dialogue Settings")]
+        [Tooltip("Time to wait before automatically advancing dialogue.")]
+        [SerializeField] private float autoAdvanceDelay = 3f;
+
         [Header("Speaker Library")]
         [Tooltip("SpeakerLibrary ScriptableObject goes in here to access your list of speakers and their sprites.")]
         [SerializeField] private SpeakerLibrary speakerLibrary;
@@ -76,7 +80,10 @@ namespace DigitalWorlds.Dialogue
         {
             IsInDialogue = true;
             dialogueParent.SetActive(true);
-            continueImage.SetActive(false);
+            if (continueImage != null)
+            {
+                continueImage.SetActive(false);
+            }
             inputStream = dialogue;
             AdvanceDialogue();
             dialogueEvents.onDialogueBegan.Invoke();
@@ -95,7 +102,7 @@ namespace DigitalWorlds.Dialogue
                 return;
             }
 
-            if (inputStream.Peek().Contains("EndQueue")) // Phrase to stop dialogue
+            if (inputStream.Count == 0 || inputStream.Peek().Contains("EndQueue")) // Phrase to stop dialogue
             {
                 inputStream.Dequeue();
                 EndDialogue();
@@ -123,7 +130,7 @@ namespace DigitalWorlds.Dialogue
                 string part = inputStream.Peek();
                 string spriteName = inputStream.Dequeue().Substring(part.IndexOf('=') + 1, part.IndexOf(']') - (part.IndexOf('=') + 1));
 
-                if (speakerDictionary.TryGetValue(spriteName, out SpeakerLibrary.SpeakerInfo speaker))
+                if (speakerDictionary.TryGetValue(spriteName, out SpeakerLibrary.SpeakerInfo speaker) && speaker.sprite != null)
                 {
                     speakerImage.sprite = speaker.sprite;
                 }
@@ -152,16 +159,24 @@ namespace DigitalWorlds.Dialogue
                 else
                 {
                     textBox.text = inputStream.Dequeue();
-                    continueImage.SetActive(true);
+                    if (continueImage != null)
+                    {
+                        continueImage.SetActive(true);
+                    }
                 }
             }
-
-            speakerImage.gameObject.SetActive(speakerImage.sprite != null);
+            if (speakerImage != null)
+            {
+                speakerImage.gameObject.SetActive(speakerImage.sprite != null);
+            }
         }
 
         private IEnumerator TextScroll(string lineOfText)
         {
-            continueImage.SetActive(false);
+            if (continueImage != null)
+            {
+                continueImage.SetActive(false);
+            }
             int letter = 0;
             textBox.text = "";
             isTyping = true;
@@ -175,9 +190,19 @@ namespace DigitalWorlds.Dialogue
             }
 
             textBox.text = lineOfText;
-            continueImage.SetActive(true);
+            if (continueImage != null)
+            {
+                continueImage.SetActive(true);
+            }
             isTyping = false;
             cancelTyping = false;
+
+            yield return new WaitForSeconds(autoAdvanceDelay);
+
+            if (!isTyping)
+            {
+                AdvanceDialogue();
+            }
         }
 
         [ContextMenu("End Dialogue")]

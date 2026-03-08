@@ -29,7 +29,7 @@ namespace DigitalWorlds.StarterPackage3D
 
         // keyToPress now uses new Input System
         [Tooltip("The key input that the script is listening for.")]
-        [SerializeField] private Key keyToPress = Key.E;
+        [SerializeField] private Key keyToPress = Key.F;
 
         [Tooltip("Whether the items required for the lock should be deleted when unlocking.")]
         [SerializeField] private bool deleteItemsWhenUsed;
