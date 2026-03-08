@@ -24,7 +24,7 @@ public class GridManager : MonoBehaviour
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
     public void RegisterDoor(int x, int y, Lock3D door)
     {
-        gridObject.SetSpace(x, y, 2);
+        gridObject.SetSpace(x, y, "door");
         doors[(x, y)] = door;
     }
 

@@ -125,7 +125,7 @@ public class PlayerMove : MonoBehaviour
                         position = (position.Item1 + 1 * sign, position.Item2);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 2)
+                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
                         if (door != null)
