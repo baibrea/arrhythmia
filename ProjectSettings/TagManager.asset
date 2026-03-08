@@ -8,6 +8,8 @@ TagManager:
   - Death
   - Health
   - PlayerAttack
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX
