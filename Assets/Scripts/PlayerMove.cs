@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private TextMeshProUGUI indicator;
     [SerializeField] private float threshold = 0.2f;
     [SerializeField] private float increaseAmount = 5f;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private Transform facingLight;
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
@@ -25,6 +28,8 @@ public class PlayerMove : MonoBehaviour
     private bool playerInputted = false;
     private bool firstBeat = true;
     private bool currBeatFailed = false;
+    private (int, int) facing = (-1, -1);
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,17 +84,21 @@ public class PlayerMove : MonoBehaviour
             // Move player
             else
             {
+                animator.SetFloat("hopMult", 0.625f + heartbeat.getBPM() / 160f);
+                animator.SetTrigger("Hop");
                 if (direction.y != 0)
                 {
-                    int sign = (int)Mathf.Sign(direction.y);
-                    if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 1)
+                    int sign = (int) Mathf.Sign(direction.y);
+                    facing.Item2 = sign;
+                    updateFacingLightY();
+                    if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1, position.Item2 + 1 * sign);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 2)
+                    else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
                         if (door != null)
@@ -101,14 +110,22 @@ public class PlayerMove : MonoBehaviour
                 else if (direction.x != 0)
                 {
                     int sign = (int)Mathf.Sign(direction.x);
-                    if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 1)
+
+                    if (facing.Item1 != sign)
+                    {
+                        playerSprite.flipX = !playerSprite.flipX;
+                        facing.Item1 = sign;
+                    }
+                    updateFacingLightX();
+
+                    if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1 + 1 * sign, position.Item2);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 2)
+                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
                         if (door != null)
@@ -143,6 +160,16 @@ public class PlayerMove : MonoBehaviour
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
+    }
+
+    void updateFacingLightY()
+    {
+        facingLight.rotation = Quaternion.Euler(0f, 90f * (facing.Item2 - 1f), 0f);
+    }
+
+    void updateFacingLightX()
+    {
+        facingLight.rotation = Quaternion.Euler(0f, 90f * facing.Item1, 0f);
     }
 
     // Check if the player missed a beat
