@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DigitalWorlds.StarterPackage3D;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     InputAction idle;
     private Vector2 direction;
     private float speed;
+    private Inventory inventory;
     private (int, int) position = (0, 0);
     private float lastProgress;
     private bool playerInputted = false;
@@ -31,6 +33,8 @@ public class PlayerMove : MonoBehaviour
         move = inputActions.FindAction("WASD");
         idle = inputActions.FindAction("Idle");
         inputActions.Enable();
+
+        inventory = FindObjectOfType<Inventory>();
 
         StartCoroutine(Move());
     }
@@ -77,14 +81,24 @@ public class PlayerMove : MonoBehaviour
             {
                 if (direction.y != 0)
                 {
-                    int sign = (int) Mathf.Sign(direction.y);
+                    int sign = (int)Mathf.Sign(direction.y);
                     if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 1)
                     {
                         Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1, position.Item2 + 1 * sign);
                     }
-                } else if (direction.x != 0)
+                    // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
+                    else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == 2)
+                    {
+                        Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
+                        if (door != null)
+                        {
+                            door.TryUnlock(inventory, direction);
+                        }
+                    }
+                }
+                else if (direction.x != 0)
                 {
                     int sign = (int)Mathf.Sign(direction.x);
                     if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 1)
@@ -92,6 +106,15 @@ public class PlayerMove : MonoBehaviour
                         Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1 + 1 * sign, position.Item2);
+                    }
+                    // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
+                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == 2)
+                    {
+                        Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
+                        if (door != null)
+                        {
+                            door.TryUnlock(inventory, direction);
+                        }
                     }
                 }
                 if (indicator != null)
@@ -105,7 +128,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (indicator != null) 
+            if (indicator != null)
             {
                 indicator.text = "MOVE FAIL";
                 indicator.color = Color.red;
