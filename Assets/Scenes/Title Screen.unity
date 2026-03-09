@@ -2157,10 +2157,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Credits Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 768218519463978391, guid: 5bf6e1587b6d7a94097cb4a491ce7518, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5125763531152343296, guid: 5bf6e1587b6d7a94097cb4a491ce7518, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
