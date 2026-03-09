@@ -28,11 +28,13 @@ public class SettingsManager : MonoBehaviour
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f; // Pause the game when settings menu is open
             }
             else
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f; // Resume the game when settings menu is closed
             }
         }
     }

@@ -3347,6 +3347,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856781900}
   m_CullTransparentMesh: 1
+--- !u!114 &896820632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1737832723023549549, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1525744356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &899648448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,6 +3654,17 @@ Transform:
   - {fileID: 72798743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986472891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5580752270184972024, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1525744356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &1004141527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5633,6 +5655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516835874}
   - component: {fileID: 1516835875}
+  - component: {fileID: 1516835876}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -5668,6 +5691,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsManager
   settingsMenuPanel: {fileID: 1525744358}
+--- !u!114 &1516835876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516835873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed30c632867745f42a811c534f4e46c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  mixer: {fileID: 24100000, guid: f5c1a98157b79c44fac020446c2658df, type: 2}
+  musicSlider: {fileID: 2091882891}
+  sfxSlider: {fileID: 896820632}
+  heartbeatSlider: {fileID: 986472891}
 --- !u!1001 &1525744356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5757,8 +5796,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.749975
       objectReference: {fileID: 0}
     - target: {fileID: 2741422387597216081, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_Name
@@ -5769,24 +5816,52 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.749975
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
       objectReference: {fileID: 0}
     - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.749975
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194138774742705301, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
       objectReference: {fileID: 0}
     - target: {fileID: 5194138774742705301, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255639916924947731, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
       objectReference: {fileID: 0}
     - target: {fileID: 5255639916924947731, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456427077979435363, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.749975
       objectReference: {fileID: 0}
     - target: {fileID: 6456427077979435363, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7195,7 +7270,7 @@ AudioSource:
   m_GameObject: {fileID: 2015570642}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4678017838217121520, guid: f5c1a98157b79c44fac020446c2658df, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 8cb09462b6f2ed74fb663d583fcde1bc, type: 3}
   m_PlayOnAwake: 0
@@ -7458,6 +7533,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2091882891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7349319998688098794, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1525744356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &2139725485
 GameObject:
   m_ObjectHideFlags: 0
