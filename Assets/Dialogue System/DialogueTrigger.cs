@@ -5,6 +5,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 namespace DigitalWorlds.Dialogue
 {
@@ -13,6 +15,10 @@ namespace DigitalWorlds.Dialogue
     /// </summary>
     public class DialogueTrigger : MonoBehaviour
     {
+        public InputActionAsset asset;
+        InputActionMap inputActions;
+        InputAction continueDialogue;
+
         [System.Serializable]
         public class DialogueTriggerEvents
         {
@@ -28,7 +34,7 @@ namespace DigitalWorlds.Dialogue
         }
 
         [Tooltip("The button input used for advancing/starting dialogue. Set to the E key by default.")]
-        [SerializeField] private KeyCode buttonInput = KeyCode.E;
+        [SerializeField] private Key buttonInput = Key.E;
 
         [Tooltip("Drag in the DialogueManager.")]
         [SerializeField] private DialogueManager dialogueManager;
@@ -63,6 +69,9 @@ namespace DigitalWorlds.Dialogue
 
         private void Start()
         {
+            // inputActions = asset.FindActionMap("Dialogue");
+            // continueDialogue = inputActions.FindAction("Continue");
+            // inputActions.Enable();
             if (dialogueManager == null)
             {
                 dialogueManager = FindAnyObjectByType<DialogueManager>();
@@ -71,7 +80,7 @@ namespace DigitalWorlds.Dialogue
 
         private void Update()
         {
-            if (Input.GetKeyDown(buttonInput) && !hasBeenUsed)
+            if (Keyboard.current[buttonInput].wasPressedThisFrame && !hasBeenUsed)
             {
                 if (dialogueManager.IsInDialogue && dialogueManager.CurrentTrigger != this)
                 {

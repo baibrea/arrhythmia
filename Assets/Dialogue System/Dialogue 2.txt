@@ -1,0 +1,3 @@
+[NAME=Player][SPEAKERSPRITE=Player]WASD to Move
+[NAME=Player][SPEAKERSPRITE=Player]Space to Idle
+[NAME=Player][SPEAKERSPRITE=Player]Don't miss a beat.
