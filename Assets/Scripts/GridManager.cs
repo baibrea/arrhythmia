@@ -19,13 +19,22 @@ public class GridManager : MonoBehaviour
     {
         gridObject = new Grid(space1, space2, parent);
         gridObject.CreateFloorBox(-6, -3, 4, 3);
-        // Very temporary code for the walls
+        // Very temporary code for the walls & props
         gridObject.SetSpace(-5, -3, "wall");
         gridObject.SetSpace(-5, -2, "wall");
         gridObject.SetSpace(-5, -1, "wall");
         gridObject.SetSpace(-5, 1, "wall");
         gridObject.SetSpace(-5, 2, "wall");
         gridObject.SetSpace(-5, 3, "wall");
+        gridObject.SetSpace(3, -3, "wall");
+        gridObject.SetSpace(3, -2, "wall");
+        gridObject.SetSpace(3, 3, "wall");
+        gridObject.SetSpace(4, 3, "wall");
+        gridObject.SetSpace(4, 2, "wall");
+        gridObject.SetSpace(-1, -2, "wall");
+        gridObject.SetSpace(-2, -2, "wall");
+        gridObject.SetSpace(0, 2, "wall");
+
     }
 
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
@@ -104,6 +113,18 @@ public class Grid
                 }
                 else
                 {
+                    GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                }
+            }
+        }
+
+        // Temporary
+        for (int i = -14; i <= -6; i++) {
+            for (int j = -3; j <= 3; j++) {
+                grid[(i, j)] = "floor";
+                if ((i + j) % 2 == 0) {
+                    GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                } else {
                     GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
                 }
             }
