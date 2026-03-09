@@ -5656,6 +5656,8 @@ GameObject:
   - component: {fileID: 1516835874}
   - component: {fileID: 1516835875}
   - component: {fileID: 1516835876}
+  - component: {fileID: 1516835878}
+  - component: {fileID: 1516835877}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -5707,6 +5709,38 @@ MonoBehaviour:
   musicSlider: {fileID: 2091882891}
   sfxSlider: {fileID: 896820632}
   heartbeatSlider: {fileID: 986472891}
+--- !u!114 &1516835877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516835873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc16a12436086f41b577bf1755c8e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
+  defaultValue: 0
+  preferenceKey: BPMPref
+  toggle: {fileID: 1525744359}
+  element: {fileID: 1916296771}
+--- !u!114 &1516835878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516835873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc16a12436086f41b577bf1755c8e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
+  defaultValue: 1
+  preferenceKey: IndicatorsPref
+  toggle: {fileID: 1525744360}
+  element: {fileID: 362469942}
 --- !u!1001 &1525744356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5797,15 +5831,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764519114295074310, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2741422387597216081, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_Name
@@ -5817,51 +5851,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4112160680205922084, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4647577854324755126, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5194138774742705301, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5194138774742705301, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5255639916924947731, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5255639916924947731, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6456427077979435363, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.749975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6456427077979435363, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5878,6 +5912,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2741422387597216081, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
   m_PrefabInstance: {fileID: 1525744356}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1525744359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7559062323962790397, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1525744356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
+--- !u!114 &1525744360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3657542186799359244, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1525744356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!1 &1548982526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6034,7 +6090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592238882
 RectTransform:
   m_ObjectHideFlags: 0
