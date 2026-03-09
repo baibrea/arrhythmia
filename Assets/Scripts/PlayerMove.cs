@@ -4,15 +4,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DigitalWorlds.StarterPackage3D;
+using DigitalWorlds.Dialogue;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("UI References")]
     [SerializeField] private HeartbeatUI heartbeat;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private GridManager grid;
     [SerializeField] private TextMeshProUGUI indicator;
+
+    [Header("BPM Settings")]
     [SerializeField] private float threshold = 0.2f;
     [SerializeField] private float increaseAmount = 5f;
+
+    [Header("Visual References")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Transform facingLight;
@@ -29,7 +35,7 @@ public class PlayerMove : MonoBehaviour
     private bool firstBeat = true;
     private bool currBeatFailed = false;
     private (int, int) facing = (-1, -1);
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,7 +94,7 @@ public class PlayerMove : MonoBehaviour
                 animator.SetTrigger("Hop");
                 if (direction.y != 0)
                 {
-                    int sign = (int) Mathf.Sign(direction.y);
+                    int sign = (int)Mathf.Sign(direction.y);
                     facing.Item2 = sign;
                     updateFacingLightY();
                     if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "floor")
@@ -151,9 +157,12 @@ public class PlayerMove : MonoBehaviour
                 indicator.color = Color.red;
             }
             // Increase BPM
-            if (heartbeat.getBPM() < 160) 
+            if (heartbeat.getBPM() < 160)
             {
-                heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
+                if (!DialogueManager.AnyDialogueActive)
+                {
+                    heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
+                }
                 cameraShake.ShakeCamera();
             }
             currBeatFailed = true;
@@ -173,26 +182,29 @@ public class PlayerMove : MonoBehaviour
     }
 
     // Check if the player missed a beat
-    void checkMiss() 
+    void checkMiss()
     {
         float currentProgress = heartbeat.getProgress();
-       
+
         // When the beat threshold ends, checks if the player inputted
-        if (currentProgress < (1 - threshold / 2f) && lastProgress >= ( 1 - threshold / 2f)) 
-        {   
-            if (firstBeat) 
+        if (currentProgress < (1 - threshold / 2f) && lastProgress >= (1 - threshold / 2f))
+        {
+            if (firstBeat)
             {
                 firstBeat = false;
                 lastProgress = heartbeat.getProgress();
                 return;
             }
-            if (!playerInputted && !currBeatFailed) 
+            if (!playerInputted && !currBeatFailed)
             {
                 // Increase BPM
-                if (heartbeat.getBPM() < 160) 
+                if (heartbeat.getBPM() < 160)
                 {
-                    heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
                     cameraShake.ShakeCamera();
+                    if (!DialogueManager.AnyDialogueActive)
+                    {
+                        heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
+                    }
                 }
             }
             playerInputted = false;
