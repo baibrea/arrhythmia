@@ -18,7 +18,7 @@ public class GridManager : MonoBehaviour
     void Awake()
     {
         gridObject = new Grid(space1, space2, parent);
-        gridObject.CreateFloorBox(-2, -2, 2, 2);
+        gridObject.CreateFloorBox(-4, -3, 4, 3);
     }
 
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
