@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         speed = 120 / heartbeat.getBPM();
-        // checkMiss();
+        checkMiss();
     }
 
     IEnumerator Move()
