@@ -45,6 +45,7 @@ namespace DigitalWorlds.StarterPackage3D
         [Header("Door Settings")]
 
         [SerializeField] private Facing playerEntersFrom;
+        [SerializeField] private Transform doorTransform;
 
         [Space(20)]
         [Header("Events")]
@@ -132,7 +133,16 @@ namespace DigitalWorlds.StarterPackage3D
             gridManager.gridObject.SetSpace(gridX, gridY, "floor");
             GetComponent<Collider>().enabled = false;
             GetComponentInChildren<Collider>().enabled = false;
-            transform.Rotate(0, -90f, 0);
+            if (doorTransform != null && playerEntersFrom != Facing.East)
+            {
+                doorTransform.localRotation = Quaternion.Euler(0, -90f, 0);
+            }
+            else if (doorTransform != null)
+            {
+                doorTransform.localRotation = Quaternion.Euler(0, 90f, 0);
+            }
+
+            
             // StartCoroutine(RotateDoor());
         }
 
