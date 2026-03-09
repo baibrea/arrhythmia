@@ -58,6 +58,8 @@ namespace DigitalWorlds.Dialogue
         [SerializeField] private DialogueEvents dialogueEvents;
 
         public DialogueTrigger CurrentTrigger { get; set; }
+
+        public static bool AnyDialogueActive { get; private set; } = false;
         public bool IsInDialogue { get; private set; } = false;
 
         private readonly Dictionary<string, SpeakerLibrary.SpeakerInfo> speakerDictionary = new();
@@ -79,6 +81,7 @@ namespace DigitalWorlds.Dialogue
         public void StartDialogue(Queue<string> dialogue)
         {
             IsInDialogue = true;
+            AnyDialogueActive = true;
             dialogueParent.SetActive(true);
             if (continueImage != null)
             {
@@ -219,6 +222,7 @@ namespace DigitalWorlds.Dialogue
             dialogueParent.SetActive(false);
 
             IsInDialogue = false;
+            AnyDialogueActive = false;
             cancelTyping = false;
             isTyping = false;
 
