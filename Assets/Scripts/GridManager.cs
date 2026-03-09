@@ -13,12 +13,19 @@ public class GridManager : MonoBehaviour
 
     [Header("Door Settings")]
     public Dictionary<(int, int), Lock3D> doors = new Dictionary<(int, int), Lock3D>();
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         gridObject = new Grid(space1, space2, parent);
-        gridObject.CreateFloorBox(-4, -3, 4, 3);
+        gridObject.CreateFloorBox(-6, -3, 4, 3);
+        // Very temporary code for the walls
+        gridObject.SetSpace(-5, -3, "wall");
+        gridObject.SetSpace(-5, -2, "wall");
+        gridObject.SetSpace(-5, -1, "wall");
+        gridObject.SetSpace(-5, 1, "wall");
+        gridObject.SetSpace(-5, 2, "wall");
+        gridObject.SetSpace(-5, 3, "wall");
     }
 
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
@@ -73,7 +80,8 @@ public class Grid
         {
             return grid[(x, y)];
         }
-        else {
+        else
+        {
             return "wall";
         }
     }
