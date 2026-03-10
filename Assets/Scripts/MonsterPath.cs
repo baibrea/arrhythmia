@@ -78,6 +78,12 @@ public class MonsterPath : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
                     position = ((int)targetPos.x, (int)targetPos.z);
                 }
+                else if (grid.CheckSpace(position.Item1, position.Item2 - (int)Mathf.Sign(distance.Item2)) == "floor")
+                {
+                    Vector3 targetPos = new Vector3(position.Item1, transform.position.y, position.Item2 + Mathf.Sign(distance.Item2));
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
+                    position = ((int)targetPos.x, (int)targetPos.z);
+                }
             }
             else
             {
@@ -88,6 +94,12 @@ public class MonsterPath : MonoBehaviour
                     position = ((int)targetPos.x, (int)targetPos.z);
                 }
                 else if (grid.CheckSpace(position.Item1 + (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
+                {
+                    Vector3 targetPos = new Vector3(position.Item1 + Mathf.Sign(distance.Item1), transform.position.y, position.Item2);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
+                    position = ((int)targetPos.x, (int)targetPos.z);
+                }
+                else if (grid.CheckSpace(position.Item1 - (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1 + Mathf.Sign(distance.Item1), transform.position.y, position.Item2);
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
