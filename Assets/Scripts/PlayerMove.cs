@@ -36,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     private bool firstBeat = true;
     private bool currBeatFailed = false;
     private (int, int) facing = (-1, -1);
+    private bool monsterWait = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,6 +65,7 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator Move()
     {
+        monsterWait = true;
         direction = move.ReadValue<Vector2>();
         bool idlePressed = false;
 
@@ -154,6 +156,7 @@ public class PlayerMove : MonoBehaviour
 
                 playerInputted = true;
             }
+            monsterWait = false;
         }
         else
         {
@@ -172,6 +175,7 @@ public class PlayerMove : MonoBehaviour
                 cameraShake.ShakeCamera();
             }
             currBeatFailed = true;
+            monsterWait = false;
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
@@ -215,6 +219,7 @@ public class PlayerMove : MonoBehaviour
             }
             playerInputted = false;
             currBeatFailed = false;
+            monsterWait = false;
         }
         lastProgress = currentProgress;
     }
@@ -229,4 +234,8 @@ public class PlayerMove : MonoBehaviour
         return position;
     }
 
+    public bool getMonsterWait()
+    {
+        return monsterWait;
+    }
 }

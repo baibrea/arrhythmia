@@ -14,29 +14,33 @@ public class MonsterPath : MonoBehaviour
     private (int, int) target;
     private Grid grid;
     private int count = 0;
+    private bool start = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         target = PlayerMove.GetPreviousPosition();
         grid = GridManager.gridObject;
-        BeginChase();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (heartbeat.getCount() % moveInterval == moveInterval - 1)
+        if (start)
         {
-            spriteTransform.localPosition = Random.insideUnitSphere * 0.1f;
-        }
-        else
-        {
-            spriteTransform.localPosition = Random.insideUnitSphere * 0.01f;
+            if (heartbeat.getCount() % moveInterval == moveInterval - 1)
+            {
+                spriteTransform.localPosition = Random.insideUnitSphere * 0.1f;
+            }
+            else
+            {
+                spriteTransform.localPosition = Random.insideUnitSphere * 0.01f;
+            }
         }
     }
 
     public void BeginChase()
     {
+        start = true;
         StartCoroutine(Chase());
     }
 
@@ -48,10 +52,17 @@ public class MonsterPath : MonoBehaviour
             jumpscare.Scare();
             yield return new WaitForSeconds(5);
         }
-        if (heartbeat.getCount() % moveInterval == 0 && count != heartbeat.getCount())
+        if (heartbeat.getCount() % moveInterval == 0 && count != heartbeat.getCount() && !PlayerMove.getMonsterWait())
         {
             count = heartbeat.getCount();
-            target = PlayerMove.GetPreviousPosition();
+            if (position == PlayerMove.GetPreviousPosition())
+            {
+                target = PlayerMove.GetCurrentPosition();
+            }
+            else
+            {
+                target = PlayerMove.GetPreviousPosition();
+            }
             (int, int) distance = (target.Item1 - position.Item1, target.Item2 - position.Item2);
             if (Mathf.Abs(distance.Item1) >= Mathf.Abs(distance.Item2))
             {
