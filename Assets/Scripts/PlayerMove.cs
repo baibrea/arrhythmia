@@ -30,6 +30,7 @@ public class PlayerMove : MonoBehaviour
     private float speed;
     private Inventory inventory;
     private (int, int) position = (0, 0);
+    private (int, int) prevPosition = (0, 0);
     private float lastProgress;
     private bool playerInputted = false;
     private bool firstBeat = true;
@@ -94,6 +95,7 @@ public class PlayerMove : MonoBehaviour
             // Move player
             else
             {
+                prevPosition = position;
                 animator.SetFloat("hopMult", 0.625f + heartbeat.getBPM() / 160f);
                 animator.SetTrigger("Hop");
                 if (direction.y != 0)
@@ -215,6 +217,16 @@ public class PlayerMove : MonoBehaviour
             currBeatFailed = false;
         }
         lastProgress = currentProgress;
+    }
+
+    public (int, int) GetPreviousPosition()
+    {
+        return prevPosition;
+    }
+
+    public (int, int) GetCurrentPosition()
+    {
+        return position;
     }
 
 }

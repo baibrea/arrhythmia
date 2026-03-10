@@ -25,6 +25,7 @@ public class HeartbeatUI : MonoBehaviour
     private FilmGrain filmGrain;
     private float bpm = 60f;
     private float progress;
+    private int counter = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -101,6 +102,7 @@ public class HeartbeatUI : MonoBehaviour
         }
         UpdateQueue();
         StartCoroutine(Pulse(interval * 0.1f));
+        counter++;
         StartCoroutine(Heartbeat());
     }
 
@@ -182,5 +184,10 @@ public class HeartbeatUI : MonoBehaviour
     public void setBPM(float value) 
     {
         bpm = value;
+    }
+
+    public int getCount()
+    {
+        return counter;
     }
 }
