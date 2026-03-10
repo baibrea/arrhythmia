@@ -2288,7 +2288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &362469943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3516,7 +3516,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.094289735, g: 0.10823446, b: 0.15471691, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5671,7 +5671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592238882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6414,7 +6414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1916296772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7007,10 +7007,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door Hinge
       objectReference: {fileID: 0}
+    - target: {fileID: 5012712584292087147, guid: e45b0504840b4084fb5182a078184ef9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580225280510296208, guid: e45b0504840b4084fb5182a078184ef9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 105137820c908c44a92a81e70f76b0a0, type: 2}
     - target: {fileID: 6251476246370960649, guid: e45b0504840b4084fb5182a078184ef9, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 2080224531}
+    - target: {fileID: 7532072269021116823, guid: e45b0504840b4084fb5182a078184ef9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.501
+      objectReference: {fileID: 0}
     - target: {fileID: 8475687048677556746, guid: e45b0504840b4084fb5182a078184ef9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.59

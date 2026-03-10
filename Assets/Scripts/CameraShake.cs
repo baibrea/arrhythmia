@@ -7,10 +7,12 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private float shakeAmount = 0.1f;
     [SerializeField] private float shakeDuration = 0.2f;
     private CinemachineFollow cam;
+    private Vector3 initialPos;
 
     private void Start()
     {
         cam = GetComponent<CinemachineFollow>();
+        initialPos = cam.FollowOffset;
     }
     public void ShakeCamera()
     {
@@ -20,7 +22,6 @@ public class CameraShake : MonoBehaviour
     IEnumerator Shake()
     {
         float timer = shakeDuration;
-        Vector3 initialPos = cam.FollowOffset;
         while (timer > 0f)
         {
             Vector3 offset = Random.insideUnitSphere * shakeAmount;

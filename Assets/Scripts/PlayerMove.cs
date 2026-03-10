@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
         idle = inputActions.FindAction("Idle");
         inputActions.Enable();
 
-        inventory = FindObjectOfType<Inventory>();
+        inventory = FindFirstObjectByType<Inventory>();
 
         StartCoroutine(Move());
     }
