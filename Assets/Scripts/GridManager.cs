@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject space1;
     [SerializeField] private GameObject space2;
     [SerializeField] private GameObject parent;
+    [SerializeField] private bool generatePrefabs = true;
     public Grid gridObject;
 
     [Header("Door Settings")]
@@ -17,7 +18,7 @@ public class GridManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        gridObject = new Grid(space1, space2, parent);
+        gridObject = new Grid(space1, space2, parent, generatePrefabs);
         gridObject.CreateFloorBox(-14, -3, 4, 3);
         // Very temporary code for the walls & props in the starting room
         gridObject.SetSpace(-5, -3, "wall");
@@ -74,13 +75,15 @@ public class Grid
     private GameObject space1;
     private GameObject space2;
     private GameObject parent;
+    private bool generatePrefabs;
 
-    public Grid(GameObject space1, GameObject space2, GameObject parent)
+    public Grid(GameObject space1, GameObject space2, GameObject parent, bool generatePrefabs)
     {
         this.space1 = space1;
         this.space2 = space2;
         this.parent = parent;
         this.grid = new Dictionary<(int, int), String>();
+        this.generatePrefabs = generatePrefabs;
     }
 
     public String CheckSpace(int x, int y)
@@ -107,14 +110,18 @@ public class Grid
             for (int j = y1; j <= y2; j++)
             {
                 grid[(i, j)] = "floor";
-                if ((i + j) % 2 == 0)
+                if (generatePrefabs)
                 {
-                    GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                    if ((i + j) % 2 == 0)
+                    {
+                        GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                    }
+                    else
+                    {
+                        GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                    }
                 }
-                else
-                {
-                    GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                }
+
             }
         }
     }

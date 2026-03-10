@@ -22,14 +22,18 @@ public class HeartbeatUI : MonoBehaviour
     private GameObject left2;
     private GameObject right2;
     private Vignette vignette;
+    private FilmGrain filmGrain;
     private float bpm = 60f;
     private float progress;
+    private int counter = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         heart = heartObject.GetComponent<Image>();
         volume.profile.TryGet(out vignette);
         vignette.intensity.overrideState = true;
+        volume.profile.TryGet(out filmGrain);
+        filmGrain.intensity.overrideState = true;
         left1 = Instantiate(left, gameObject.transform);
         left2 = Instantiate(left, gameObject.transform);
         right1 = Instantiate(right, gameObject.transform);
@@ -54,7 +58,8 @@ public class HeartbeatUI : MonoBehaviour
     void Update()
     {
         text.text = "BPM: " + bpm + " Progress: " + progress;
-        vignette.intensity.value = Mathf.Lerp(0, 0.5f, bpm / 160);
+        vignette.intensity.value = Mathf.InverseLerp(60f, 160f, bpm) / 2f;
+        filmGrain.intensity.value = Mathf.InverseLerp(60f, 160f, bpm);
         left1.transform.localPosition = new Vector3(left.transform.localPosition.x - 150, 0, 0);
         left2.transform.localPosition = new Vector3(left.transform.localPosition.x - 300, 0, 0);
         right1.transform.localPosition = new Vector3(right.transform.localPosition.x + 150, 0, 0);
@@ -97,6 +102,7 @@ public class HeartbeatUI : MonoBehaviour
         }
         UpdateQueue();
         StartCoroutine(Pulse(interval * 0.1f));
+        counter++;
         StartCoroutine(Heartbeat());
     }
 
@@ -178,5 +184,10 @@ public class HeartbeatUI : MonoBehaviour
     public void setBPM(float value) 
     {
         bpm = value;
+    }
+
+    public int getCount()
+    {
+        return counter;
     }
 }

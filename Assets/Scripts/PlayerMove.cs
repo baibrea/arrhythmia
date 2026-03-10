@@ -30,11 +30,13 @@ public class PlayerMove : MonoBehaviour
     private float speed;
     private Inventory inventory;
     private (int, int) position = (0, 0);
+    private (int, int) prevPosition = (0, 0);
     private float lastProgress;
     private bool playerInputted = false;
     private bool firstBeat = true;
     private bool currBeatFailed = false;
     private (int, int) facing = (-1, -1);
+    private bool monsterWait = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,7 +47,7 @@ public class PlayerMove : MonoBehaviour
         idle = inputActions.FindAction("Idle");
         inputActions.Enable();
 
-        inventory = FindObjectOfType<Inventory>();
+        inventory = FindFirstObjectByType<Inventory>();
 
         StartCoroutine(Move());
     }
@@ -63,6 +65,7 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator Move()
     {
+        monsterWait = true;
         direction = move.ReadValue<Vector2>();
         bool idlePressed = false;
 
@@ -94,6 +97,7 @@ public class PlayerMove : MonoBehaviour
             // Move player
             else
             {
+                prevPosition = position;
                 animator.SetFloat("hopMult", 0.625f + heartbeat.getBPM() / 160f);
                 animator.SetTrigger("Hop");
                 if (direction.y != 0)
@@ -152,6 +156,7 @@ public class PlayerMove : MonoBehaviour
 
                 playerInputted = true;
             }
+            monsterWait = false;
         }
         else
         {
@@ -170,6 +175,7 @@ public class PlayerMove : MonoBehaviour
                 cameraShake.ShakeCamera();
             }
             currBeatFailed = true;
+            monsterWait = false;
         }
         yield return new WaitForSeconds(speed / 3);
         StartCoroutine(Move());
@@ -213,8 +219,23 @@ public class PlayerMove : MonoBehaviour
             }
             playerInputted = false;
             currBeatFailed = false;
+            monsterWait = false;
         }
         lastProgress = currentProgress;
     }
 
+    public (int, int) GetPreviousPosition()
+    {
+        return prevPosition;
+    }
+
+    public (int, int) GetCurrentPosition()
+    {
+        return position;
+    }
+
+    public bool getMonsterWait()
+    {
+        return monsterWait;
+    }
 }
