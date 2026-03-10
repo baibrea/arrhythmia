@@ -18,8 +18,8 @@ public class GridManager : MonoBehaviour
     void Awake()
     {
         gridObject = new Grid(space1, space2, parent);
-        gridObject.CreateFloorBox(-6, -3, 4, 3);
-        // Very temporary code for the walls & props
+        gridObject.CreateFloorBox(-14, -3, 4, 3);
+        // Very temporary code for the walls & props in the starting room
         gridObject.SetSpace(-5, -3, "wall");
         gridObject.SetSpace(-5, -2, "wall");
         gridObject.SetSpace(-5, -1, "wall");
@@ -113,18 +113,6 @@ public class Grid
                 }
                 else
                 {
-                    GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                }
-            }
-        }
-
-        // Temporary
-        for (int i = -14; i <= -6; i++) {
-            for (int j = -3; j <= 3; j++) {
-                grid[(i, j)] = "floor";
-                if ((i + j) % 2 == 0) {
-                    GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                } else {
                     GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
                 }
             }
