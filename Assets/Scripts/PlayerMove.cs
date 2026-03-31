@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DigitalWorlds.StarterPackage3D;
 using DigitalWorlds.Dialogue;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private HeartbeatUI heartbeat;
+    [SerializeField] private GameObject heartbeatSystem;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private GridManager grid;
     [SerializeField] private TextMeshProUGUI indicator;
@@ -65,8 +67,15 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator Move()
     {
-        monsterWait = true;
-        direction = move.ReadValue<Vector2>();
+        if (!heartbeat.checkRunning())
+        {
+            monsterWait = false;
+        }
+        else
+        {
+            monsterWait = true;
+        }
+            direction = move.ReadValue<Vector2>();
         bool idlePressed = false;
 
         while (direction != Vector2.zero)
@@ -74,15 +83,19 @@ public class PlayerMove : MonoBehaviour
             direction = move.ReadValue<Vector2>();
             yield return null;
         }
-        while (direction == Vector2.zero && !idlePressed)
+        while ((direction == Vector2.zero && !idlePressed) || !heartbeat.checkRunning())
         {
             direction = move.ReadValue<Vector2>();
             idlePressed = idle.WasPressedThisFrame();
             yield return null;
         }
         if (
-            (heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f))
+            ((heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f)))
         {
+            if (!heartbeat.checkRunning())
+            {
+                idlePressed = true;
+            }
             // Check for idle
             if (idlePressed)
             {
@@ -166,7 +179,7 @@ public class PlayerMove : MonoBehaviour
                 indicator.color = Color.red;
             }
             // Increase BPM
-            if (heartbeat.getBPM() < 160)
+            if (heartbeat.getBPM() < 160 && heartbeat.checkRunning())
             {
                 if (!DialogueManager.AnyDialogueActive)
                 {
@@ -197,7 +210,7 @@ public class PlayerMove : MonoBehaviour
         float currentProgress = heartbeat.getProgress();
 
         // When the beat threshold ends, checks if the player inputted
-        if (currentProgress < (1 - threshold / 2f) && lastProgress >= (1 - threshold / 2f))
+        if (currentProgress < (1 - threshold / 2f) && lastProgress >= (1 - threshold / 2f) && heartbeat.checkRunning())
         {
             if (firstBeat)
             {
