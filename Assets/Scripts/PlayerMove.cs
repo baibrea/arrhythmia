@@ -24,6 +24,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Transform facingLight;
+
+    [Header("Player Settings")]
+    [SerializeField] private int startX;
+    [SerializeField] private int startY;
+
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
@@ -50,6 +55,10 @@ public class PlayerMove : MonoBehaviour
         inputActions.Enable();
 
         inventory = FindFirstObjectByType<Inventory>();
+        position = (startX, startY);
+        prevPosition = position;
+        gameObject.transform.position = new Vector3(startX, 0.35f, startY);
+
 
         StartCoroutine(Move());
     }
@@ -250,5 +259,10 @@ public class PlayerMove : MonoBehaviour
     public bool getMonsterWait()
     {
         return monsterWait;
+    }
+
+    public void setFirstBeat(bool i)
+    {
+        firstBeat = i;
     }
 }

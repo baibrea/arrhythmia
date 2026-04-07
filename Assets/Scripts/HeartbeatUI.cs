@@ -16,6 +16,7 @@ public class HeartbeatUI : MonoBehaviour
     [SerializeField] private Volume volume;
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
+    [SerializeField] private PlayerMove playerMove;
     private Image heart;
     private GameObject left1;
     private GameObject right1;
@@ -40,7 +41,7 @@ public class HeartbeatUI : MonoBehaviour
         left2 = Instantiate(left, gameObject.transform);
         right1 = Instantiate(right, gameObject.transform);
         right2 = Instantiate(right, gameObject.transform);
-        StartCoroutine(Heartbeat());
+        StartCoroutine(Heartbeat(0));
         // StartCoroutine(MoveOutlines());
     }
 
@@ -68,14 +69,14 @@ public class HeartbeatUI : MonoBehaviour
         right2.transform.localPosition = new Vector3(right.transform.localPosition.x + 300, 0, 0);
     }
 
-    IEnumerator Heartbeat()
+    IEnumerator Heartbeat(float startDelay)
     {
         if (isRunning)
         {
             heart.color = Color.white;
             float interval = 60f / bpm;
-            float timer = interval;
-            StartCoroutine(HeartbeatSound(interval));
+            float timer = interval + startDelay;
+            StartCoroutine(HeartbeatSound(interval + startDelay));
             Image leftImage = left.GetComponent<Image>();
             Image rightImage = right.GetComponent<Image>();
             Image left1Image = left1.GetComponent<Image>();
@@ -86,15 +87,15 @@ public class HeartbeatUI : MonoBehaviour
             {
                 yield return null;
                 timer -= Time.deltaTime;
-                progress = Mathf.Round((timer / interval) * 100f) / 100f;
-                left.transform.localPosition = Vector3.Lerp(new Vector3(-150, 0, 0), Vector3.zero, 1 - progress);
-                right.transform.localPosition = Vector3.Lerp(new Vector3(150, 0, 0), Vector3.zero, 1 - progress);
-                leftImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left.transform.localPosition.x / 450));
-                rightImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right.transform.localPosition.x / 450));
-                left1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left1.transform.localPosition.x / 450));
-                right1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right1.transform.localPosition.x / 450));
-                left2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + left2.transform.localPosition.x / 450));
-                right2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 - right2.transform.localPosition.x / 450));
+                progress = Mathf.Round((timer / (interval + startDelay)) * 100f) / 100f;
+                left.transform.localPosition = Vector3.Lerp(new Vector3(-150 * (1 + startDelay), 0, 0), Vector3.zero, 1 - progress);
+                right.transform.localPosition = Vector3.Lerp(new Vector3(150 * (1 + startDelay), 0, 0), Vector3.zero, 1 - progress);
+                leftImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay + left.transform.localPosition.x / 450));
+                rightImage.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay - right.transform.localPosition.x / 450));
+                left1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay + left1.transform.localPosition.x / 450));
+                right1Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay - right1.transform.localPosition.x / 450));
+                left2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay + left2.transform.localPosition.x / 450));
+                right2Image.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, 1 + startDelay - right2.transform.localPosition.x / 450));
                 if (toggle.isOn && (progress <= 0.15f || progress >= 0.85f))
                 {
                     heart.color = Color.green;
@@ -107,7 +108,7 @@ public class HeartbeatUI : MonoBehaviour
             UpdateQueue();
             StartCoroutine(Pulse(interval * 0.1f));
             counter++;
-            StartCoroutine(Heartbeat());
+            StartCoroutine(Heartbeat(0));
         }
         else
         {
@@ -121,7 +122,8 @@ public class HeartbeatUI : MonoBehaviour
             }
             UpdateQueue();
             counter++;
-            StartCoroutine(Heartbeat());
+            Debug.Log(counter);
+            StartCoroutine(Heartbeat(0));
         }
     }
 
@@ -213,7 +215,6 @@ public class HeartbeatUI : MonoBehaviour
     public void stopRunning()
     {
         isRunning = false;
-        StopAllCoroutines();
         heartObject.GetComponent<Image>().enabled = false;
         left.GetComponent<Image>().enabled = false;
         left1.GetComponent<Image>().enabled = false;
@@ -225,9 +226,10 @@ public class HeartbeatUI : MonoBehaviour
 
     public void startRunning()
     {
+        StopAllCoroutines();
+        playerMove.setFirstBeat(true);
         isRunning = true;
-        UpdateQueue();
-        StartCoroutine(Heartbeat());
+        StartCoroutine(Heartbeat(0.5f));
         heartObject.GetComponent<Image>().enabled = true;
         left.GetComponent<Image>().enabled = true;
         left1.GetComponent<Image>().enabled = true;

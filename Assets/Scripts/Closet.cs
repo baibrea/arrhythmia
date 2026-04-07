@@ -10,6 +10,7 @@ public class Closet : MonoBehaviour
     [SerializeField] private Light playerLight;
     [SerializeField] private HeartbeatUI heartbeat;
     [SerializeField] private GameObject heartbeatSystem;
+    [SerializeField] private GameObject rhythmUI;
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction interact;
@@ -22,6 +23,7 @@ public class Closet : MonoBehaviour
         inputActions = asset.FindActionMap("Move");
         interact = inputActions.FindAction("Interact");
         inputActions.Enable();
+        rhythmUI.SetActive(false);
 
         prompt.enabled = false;
     }
@@ -45,6 +47,7 @@ public class Closet : MonoBehaviour
 
     IEnumerator RhythmGame()
     {
+        rhythmUI.SetActive(true);
         yield return null;
     }
 
@@ -67,6 +70,7 @@ public class Closet : MonoBehaviour
             prompt.enabled = true;
             playerSprite.enabled = true;
             playerLight.enabled = true;
+            rhythmUI.SetActive(false);
             heartbeat.startRunning();
             StartCoroutine(InteractCooldown(0.5f));
         }
