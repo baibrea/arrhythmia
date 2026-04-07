@@ -6,20 +6,19 @@ public class MonsterPath : MonoBehaviour
 {
     [SerializeField] PlayerMove PlayerMove;
     [SerializeField] HeartbeatUI heartbeat;
-    [SerializeField] GridManager GridManager;
+    [SerializeField] GridManager grid;
     [SerializeField] int moveInterval = 3;
     [SerializeField] private Transform spriteTransform;
     [SerializeField] private Jumpscare jumpscare;
     private (int, int) position = (-2, 2);
     private (int, int) target;
-    private Grid grid;
     private int count = 0;
     private bool start = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         target = PlayerMove.GetPreviousPosition();
-        grid = GridManager.gridObject;
+        // grid = GridManager.gridObject;
     }
 
     // Update is called once per frame
@@ -66,19 +65,19 @@ public class MonsterPath : MonoBehaviour
             (int, int) distance = (target.Item1 - position.Item1, target.Item2 - position.Item2);
             if (Mathf.Abs(distance.Item1) >= Mathf.Abs(distance.Item2))
             {
-                if (grid.CheckSpace(position.Item1 + (int) Mathf.Sign(distance.Item1), position.Item2) == "floor")
+                if (grid.GetTile(position.Item1 + (int) Mathf.Sign(distance.Item1), position.Item2) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1 + Mathf.Sign(distance.Item1), transform.position.y, position.Item2);
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
                     position = ((int) targetPos.x, (int) targetPos.z);
                 }
-                else if (grid.CheckSpace(position.Item1, position.Item2 + (int)Mathf.Sign(distance.Item2)) == "floor")
+                else if (grid.GetTile(position.Item1, position.Item2 + (int)Mathf.Sign(distance.Item2)) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1, transform.position.y, position.Item2 + Mathf.Sign(distance.Item2));
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
                     position = ((int)targetPos.x, (int)targetPos.z);
                 }
-                else if (grid.CheckSpace(position.Item1, position.Item2 - (int)Mathf.Sign(distance.Item2)) == "floor")
+                else if (grid.GetTile(position.Item1, position.Item2 - (int)Mathf.Sign(distance.Item2)) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1, transform.position.y, position.Item2 + Mathf.Sign(distance.Item2));
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
@@ -87,19 +86,19 @@ public class MonsterPath : MonoBehaviour
             }
             else
             {
-                if (grid.CheckSpace(position.Item1, position.Item2 + (int)Mathf.Sign(distance.Item2)) == "floor")
+                if (grid.GetTile(position.Item1, position.Item2 + (int)Mathf.Sign(distance.Item2)) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1, transform.position.y, position.Item2 + Mathf.Sign(distance.Item2));
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
                     position = ((int)targetPos.x, (int)targetPos.z);
                 }
-                else if (grid.CheckSpace(position.Item1 + (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
+                else if (grid.GetTile(position.Item1 + (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1 + Mathf.Sign(distance.Item1), transform.position.y, position.Item2);
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);
                     position = ((int)targetPos.x, (int)targetPos.z);
                 }
-                else if (grid.CheckSpace(position.Item1 - (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
+                else if (grid.GetTile(position.Item1 - (int)Mathf.Sign(distance.Item1), position.Item2) == "floor")
                 {
                     Vector3 targetPos = new Vector3(position.Item1 + Mathf.Sign(distance.Item1), transform.position.y, position.Item2);
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 2.5f);

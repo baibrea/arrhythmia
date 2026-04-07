@@ -12,15 +12,27 @@ public class GridManager : MonoBehaviour
     [SerializeField] private bool generatePrefabs = true;
     public Grid gridObject;
 
+     /* 
+    Key is a pair representing the xy coordinate of the grid space
+    Value is a string representing the grid type:
+        wall (not traversable by player)
+        (traversable by player)
+        door...
+        etc...
+    */
+    private Dictionary<(int, int), String> grid = new Dictionary<(int, int), String>();
+
+
     [Header("Door Settings")]
     public Dictionary<(int, int), Lock3D> doors = new Dictionary<(int, int), Lock3D>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        gridObject = new Grid(space1, space2, parent, generatePrefabs);
-        gridObject.CreateFloorBox(-14, -3, 4, 3);
+        // gridObject = new Grid(space1, space2, parent, generatePrefabs);
+        // gridObject.CreateFloorBox(-14, -3, 4, 3);
         // Very temporary code for the walls & props in the starting room
+        /*
         gridObject.SetSpace(-5, -3, "wall");
         gridObject.SetSpace(-5, -2, "wall");
         gridObject.SetSpace(-5, -1, "wall");
@@ -35,13 +47,14 @@ public class GridManager : MonoBehaviour
         gridObject.SetSpace(-1, -2, "wall");
         gridObject.SetSpace(-2, -2, "wall");
         gridObject.SetSpace(0, 2, "wall");
+        */
 
     }
 
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
     public void RegisterDoor(int x, int y, Lock3D door)
     {
-        gridObject.SetSpace(x, y, "door");
+        SetTile(x, y, "door");
         doors[(x, y)] = door;
     }
 
@@ -58,19 +71,68 @@ public class GridManager : MonoBehaviour
             return null;
         }
     }
+
+    public void SetTile(int x, int y, String type)
+    {
+        grid[(x, y)] = type;
+    }
+
+    public String GetTile(int x, int y) 
+    {
+        if (grid.ContainsKey((x, y)))
+        {
+            return grid[(x, y)];
+        }
+        else
+        {
+            return "wall";
+        }
+    }
+
+    public void FillFloor(int x1, int y1, int x2, int y2)
+    {
+        for (int i = x1; i <= x2; i++)
+        {
+            for (int j = y1; j <= y2; j++)
+            {
+                SetTile(i, j, "floor");
+
+                if (generatePrefabs)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                    }
+                    else
+                    {
+                        GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                    }
+                }
+
+            }
+        }
+    }
+
+    public void FillWalls(int x1, int y1, int x2, int y2)
+    {
+        for (int i = x1; i <= x2; i++) {
+            SetTile(i, y1, "wall");
+            SetTile(i, y2, "wall");
+        }
+
+        for (int j = y1; j <= y2; j++) {
+            SetTile(x1, j, "wall");
+            SetTile(x2, j, "wall");
+        }
+    }
+
 }
 
+/*
 [Serializable]
 public class Grid
 {
-    /* 
-    Key is a pair representing the xy coordinate of the grid space
-    Value is a string representing the grid type:
-        wall (not traversable by player)
-        (traversable by player)
-        door...
-        etc...
-    */
+
     private Dictionary<(int, int), String> grid;
     private GameObject space1;
     private GameObject space2;
@@ -126,3 +188,4 @@ public class Grid
         }
     }
 }
+*/

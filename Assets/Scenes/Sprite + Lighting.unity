@@ -11128,6 +11128,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685278779}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &691323487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691323489}
+  - component: {fileID: 691323488}
+  m_Layer: 0
+  m_Name: Level Builder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &691323488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691323487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11876e8e9b068cb4cb796c4d4afdeca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelBuilder
+  grid: {fileID: 2080224531}
+  space1: {fileID: 8792547525274331475, guid: 2f9fb34cb9ba7a9459240de3cb2e7ec4, type: 3}
+  space2: {fileID: 3135549969094400901, guid: f226acbef46724546b1bc66985765082, type: 3}
+  parent: {fileID: 1375533685}
+  generatePrefabs: 0
+--- !u!4 &691323489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691323487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.11922, y: 0, z: 1.83235}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &691966471
 GameObject:
   m_ObjectHideFlags: 0
@@ -15028,7 +15077,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.094289735, g: 0.10823446, b: 0.15471691, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -21955,7 +22004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   PlayerMove: {fileID: 1719653923}
   heartbeat: {fileID: 2015570646}
-  GridManager: {fileID: 2080224531}
+  grid: {fileID: 0}
   moveInterval: 3
   spriteTransform: {fileID: 210369753}
   jumpscare: {fileID: 321179274}
@@ -34558,6 +34607,7 @@ MonoBehaviour:
   space2: {fileID: 3135549969094400901, guid: f226acbef46724546b1bc66985765082, type: 3}
   parent: {fileID: 1375533685}
   generatePrefabs: 0
+  gridObject: {fileID: 0}
 --- !u!4 &2080224532
 Transform:
   m_ObjectHideFlags: 0
@@ -37073,3 +37123,4 @@ SceneRoots:
   - {fileID: 718115489}
   - {fileID: 512190409}
   - {fileID: 1360827261}
+  - {fileID: 691323489}
