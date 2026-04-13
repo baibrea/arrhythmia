@@ -10,7 +10,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject space2;
     [SerializeField] private GameObject parent;
     [SerializeField] private bool generatePrefabs = true;
-    public Grid gridObject;
 
      /* 
     Key is a pair representing the xy coordinate of the grid space
