@@ -17,6 +17,7 @@ public class HeartbeatUI : MonoBehaviour
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
     [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private GameObject line;
     private Image heart;
     private GameObject left1;
     private GameObject right1;
@@ -189,7 +190,7 @@ public class HeartbeatUI : MonoBehaviour
     {
         yield return new WaitForSeconds(time - time * 0.25f);
         sound.pitch = Mathf.Lerp(0, 2, bpm / 200);
-        sound.PlayOneShot(sound.clip, 2);
+        sound.PlayOneShot(sound.clip, 2.5f);
     }
 
     public float getProgress()
@@ -222,6 +223,7 @@ public class HeartbeatUI : MonoBehaviour
         right.GetComponent<Image>().enabled = false;
         right1.GetComponent<Image>().enabled = false;
         right2.GetComponent<Image>().enabled = false;
+        line.GetComponent<Image>().enabled = false;
     }
 
     public void startRunning()
@@ -237,6 +239,7 @@ public class HeartbeatUI : MonoBehaviour
         right.GetComponent<Image>().enabled = true;
         right1.GetComponent<Image>().enabled = true;
         right2.GetComponent<Image>().enabled = true;
+        line.GetComponent <Image>().enabled = true;
     }
 
     public bool checkRunning()
