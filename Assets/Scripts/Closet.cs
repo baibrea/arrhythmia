@@ -150,7 +150,14 @@ public class Closet : MonoBehaviour
                     if (currentNote.transform.position.x > leftBoundary + 75 && currentNote.transform.position.x < rightBoundary - 75)
                     {
                         Instantiate(greatPrefab, timingParent, false);
+                        Animator noteAnimator = currentNote.GetComponent<Animator>();
+                        currentNote.transform.position = windowRect.position;
+                        currentNote.transform.SetParent(timingParent, true);
+                        noteAnimator.SetTrigger("Pop");
                         multiplier = 0.975f;
+                        heartbeat.setBPM(heartbeat.getBPM() * multiplier);
+                        Destroy(currentNote, 0.2f);
+                        yield break;
                     }
                     else if (currentNote.transform.position.x > leftBoundary + 50 && currentNote.transform.position.x < rightBoundary - 50)
                     {

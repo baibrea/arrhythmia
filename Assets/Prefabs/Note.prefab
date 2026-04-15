@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 573366861294042435}
   - component: {fileID: 3556299200094485004}
   - component: {fileID: -8821828874105836607}
+  - component: {fileID: 3031621597758965565}
   m_Layer: 5
   m_Name: Note
   m_TagString: Untagged
@@ -196,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Material: {fileID: 2100000, guid: 7471140c92325c349ac7830675b56cce, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -226,3 +227,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1218870b6638b3e42b5bac4a540f7ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!95 &3031621597758965565
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105216077007315227}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1274450489f8fcf45a5ed0456e9b6833, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
