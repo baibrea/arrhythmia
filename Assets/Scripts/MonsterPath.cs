@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
 public class MonsterPath : MonoBehaviour
 {
