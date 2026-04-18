@@ -127,14 +127,15 @@ public class PlayerMove : MonoBehaviour
                     int sign = (int)Mathf.Sign(direction.y);
                     facing.Item2 = sign;
                     updateFacingLightY();
-                    if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "floor")
+                    
+                    if (grid.GetTile(position.Item1, position.Item2 + 1 * sign) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1, position.Item2 + 1 * sign);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "door")
+                    else if (grid.GetTile(position.Item1, position.Item2 + 1 * sign) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
                         if (door != null)
@@ -153,19 +154,20 @@ public class PlayerMove : MonoBehaviour
                         facing.Item1 = sign;
                     }
                     updateFacingLightX();
-
-                    if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "floor")
+                    Debug.Log(grid.GetTile(-5, 0));
+                    if (grid.GetTile(position.Item1 + 1 * sign, position.Item2) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1 + 1 * sign, position.Item2);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "door")
+                    else if (grid.GetTile(position.Item1 + 1 * sign, position.Item2) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
                         if (door != null)
                         {
+                            Debug.Log("hi");
                             door.TryUnlock(inventory, direction);
                         }
                     }
