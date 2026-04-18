@@ -47547,8 +47547,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   PlayerMove: {fileID: 1719653923}
   heartbeat: {fileID: 2015570646}
-  grid: {fileID: 0}
-  moveInterval: 3
+  grid: {fileID: 2080224531}
+  moveInterval: 6
   spriteTransform: {fileID: 210369753}
   jumpscare: {fileID: 321179274}
 --- !u!4 &1360827261
@@ -60285,6 +60285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   heartbeat: {fileID: 2015570646}
+  heartbeatSystem: {fileID: 0}
   cameraShake: {fileID: 1548982531}
   grid: {fileID: 2080224531}
   indicator: {fileID: 362469944}
@@ -60293,6 +60294,8 @@ MonoBehaviour:
   animator: {fileID: 1259950218}
   playerSprite: {fileID: 1259950219}
   facingLight: {fileID: 2139725486}
+  startX: 0
+  startY: 0
   asset: {fileID: -944628639613478452, guid: 8fc7c8686a8b6b34cbab53d8d8cd2f61, type: 3}
 --- !u!54 &1719653924
 Rigidbody:
@@ -70905,6 +70908,8 @@ MonoBehaviour:
   volume: {fileID: 832575518}
   left: {fileID: 1218388422}
   right: {fileID: 856781900}
+  playerMove: {fileID: 0}
+  line: {fileID: 0}
 --- !u!82 &2015570647
 AudioSource:
   m_ObjectHideFlags: 0
