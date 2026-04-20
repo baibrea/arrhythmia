@@ -36,10 +36,10 @@ public class LevelBuilder : MonoBehaviour
 
         // Screens Room
         grid.FillFloor(-9, 11, -2, 18); // Entry Room
-        grid.FillFloor(-1, 16, 0, 18); // Walkway to 2nd room
+        grid.FillFloor(-1, 17, 0, 18); // Walkway to 2nd room
         grid.FillFloor(1, 11, 10, 22); // 2nd room
         grid.FillFloor(-1, 6, 10, 9); // 3rd bottom area
-        grid.FillFloor(7, 10, 10, 10); // Connecting line to 3rd bottom area
+        grid.FillFloor(9, 10, 10, 10); // Connecting line to 3rd bottom area
 
         // Screens Room Exit Path
         // TODO: make it appear after the player collects the key
