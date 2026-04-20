@@ -22562,10 +22562,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   PlayerMove: {fileID: 1719653923}
   heartbeat: {fileID: 2015570646}
-  GridManager: {fileID: 2080224531}
+  grid: {fileID: 0}
   moveInterval: 3
   spriteTransform: {fileID: 210369753}
   jumpscare: {fileID: 321179274}
+  playerTransform: {fileID: 0}
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 0
+  sightDistance: 20
 --- !u!4 &1360827261
 Transform:
   m_ObjectHideFlags: 0
@@ -35424,7 +35429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2082389263
 RectTransform:
   m_ObjectHideFlags: 0

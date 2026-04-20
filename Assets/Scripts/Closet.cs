@@ -19,6 +19,7 @@ public class Closet : MonoBehaviour
     [SerializeField] private Transform notes;
     [SerializeField] private GameObject notePrefab;
     [SerializeField] private GameObject window;
+    [SerializeField] private PlayerMove playerMove;
 
     [Header("Timing Displays")]
     [SerializeField] private Transform timingParent;
@@ -65,6 +66,7 @@ public class Closet : MonoBehaviour
                 prompt.enabled = false;
                 playerSprite.enabled = false;
                 playerLight.enabled = false;
+                playerMove.toggleCloset(true);
                 heartbeat.stopRunning();
                 rhythmUI.SetActive(true);
                 StartCoroutine(RhythmGame(0.5f));
@@ -232,6 +234,7 @@ public class Closet : MonoBehaviour
         prompt.enabled = false;
         playerSprite.enabled = true;
         playerLight.enabled = true;
+        playerMove.toggleCloset(false);
         StopAllCoroutines();
     }
 }
