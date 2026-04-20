@@ -807,7 +807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.800049, y: -32}
+  m_AnchoredPosition: {x: -14.799805, y: -32}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &18396463
@@ -6930,7 +6930,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &145740277
 GameObject:
@@ -23754,6 +23754,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565150790}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &571746793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 927453278258525810, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &573857004
 GameObject:
   m_ObjectHideFlags: 0
@@ -28533,6 +28544,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672726245}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &679560626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1235152472124472771, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!1 &682935477
 GameObject:
   m_ObjectHideFlags: 0
@@ -30733,7 +30755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
   defaultValue: 0
   preferenceKey: BPMPref
-  toggle: {fileID: 1759983477}
+  toggle: {fileID: 832389108}
   element: {fileID: 1916296771}
 --- !u!114 &718115486
 MonoBehaviour:
@@ -30749,7 +30771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
   defaultValue: 1
   preferenceKey: IndicatorsPref
-  toggle: {fileID: 1759983478}
+  toggle: {fileID: 679560626}
   element: {fileID: 362469942}
 --- !u!114 &718115487
 MonoBehaviour:
@@ -30764,9 +30786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   mixer: {fileID: 24100000, guid: f5c1a98157b79c44fac020446c2658df, type: 2}
-  musicSlider: {fileID: 1759983481}
-  sfxSlider: {fileID: 1759983480}
-  heartbeatSlider: {fileID: 1759983479}
+  musicSlider: {fileID: 1644905660}
+  sfxSlider: {fileID: 1443017996}
+  heartbeatSlider: {fileID: 571746793}
 --- !u!114 &718115488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30779,7 +30801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4ed778c54cc7a49a98040b53028e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsManager
-  settingsMenuPanel: {fileID: 1646852135}
+  settingsMenuPanel: {fileID: 1868069257}
 --- !u!4 &718115489
 Transform:
   m_ObjectHideFlags: 0
@@ -34911,6 +34933,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830581945}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &832389108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7634540629889995059, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!1 &832455265
 GameObject:
   m_ObjectHideFlags: 0
@@ -36266,7 +36299,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855462674
 GameObject:
@@ -43569,7 +43602,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028881708
 GameObject:
@@ -61700,6 +61733,12 @@ Transform:
   - {fileID: 262991218}
   - {fileID: 1046472070}
   - {fileID: 302686474}
+  - {fileID: 144373666}
+  - {fileID: 1028263830}
+  - {fileID: 1700664516}
+  - {fileID: 2079599605}
+  - {fileID: 854647491}
+  - {fileID: 1376865190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376865186
@@ -61813,7 +61852,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1382093545
 GameObject:
@@ -64581,6 +64620,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439988933}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1443017996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6978788177460104972, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1444625945
 GameObject:
   m_ObjectHideFlags: 0
@@ -73548,6 +73598,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643861080}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1644905660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8016139879004325264, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1645050419
 GameObject:
   m_ObjectHideFlags: 0
@@ -73773,11 +73834,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645878613}
   m_Mesh: {fileID: 4300000, guid: 8244cab4f6e05914fad738744cafc22a, type: 3}
---- !u!1 &1646852135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1364562342370898950, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1649527584
 GameObject:
   m_ObjectHideFlags: 0
@@ -75759,7 +75815,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700698231
 GameObject:
@@ -78819,6 +78875,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2690195774975619923, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2741422387597216081, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_Name
       value: Settings Panel
@@ -78933,61 +78993,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4803521604279311885, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
   m_PrefabInstance: {fileID: 1759983475}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1759983477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7634540629889995059, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
---- !u!114 &1759983478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1235152472124472771, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
---- !u!114 &1759983479 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 927453278258525810, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &1759983480 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6978788177460104972, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &1759983481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8016139879004325264, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1762294658
 GameObject:
   m_ObjectHideFlags: 0
@@ -82755,6 +82760,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867217473}
   m_Mesh: {fileID: -2746142260806068395, guid: fb57d3c91f5e05d4da6ea5d99cea7d05, type: 3}
+--- !u!1 &1868069257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1364562342370898950, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+  m_PrefabInstance: {fileID: 1759983475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877513288
 GameObject:
   m_ObjectHideFlags: 0
@@ -93114,7 +93124,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1375533686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2080224530
 GameObject:
@@ -99863,12 +99873,6 @@ SceneRoots:
   - {fileID: 1719653921}
   - {fileID: 1104143772}
   - {fileID: 1375533686}
-  - {fileID: 144373666}
-  - {fileID: 1028263830}
-  - {fileID: 1700664516}
-  - {fileID: 2079599605}
-  - {fileID: 854647491}
-  - {fileID: 1376865190}
   - {fileID: 1548982530}
   - {fileID: 448781886}
   - {fileID: 2080224532}
