@@ -63,7 +63,7 @@ public class MonitorFlicker : MonoBehaviour
         {
             if (r != null)
             {
-                r.material.SetColor("_EmissionColor", Color.black * missFlashIntensity);
+                r.material.SetColor("_EmissionColor", Color.red * missFlashIntensity);
             }
         }
 
