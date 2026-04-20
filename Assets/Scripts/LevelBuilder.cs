@@ -27,12 +27,16 @@ public class LevelBuilder : MonoBehaviour
         grid.FillFloor(-14, 4, -13, 10);
         grid.FillFloor(-9, 4, -8, 10);
 
+        // Final Hallway Doors
+        grid.SetTile(-14, 4, "door");
+        grid.SetTile(-13, 4, "door");
+
         // First Level
 
         // grid.FillFloor(-25, 11, -18, 17);
         // grid.FillFloor(-28, 15, -23, 20);
 
-        // Rooms
+        // Rooms for first level
         grid.FillFloor(-28, 11, -18, 12);
         grid.FillFloor(-34, 13, -30, 18);
         grid.FillFloor(-28, 13, -27, 27);
@@ -40,7 +44,7 @@ public class LevelBuilder : MonoBehaviour
         grid.FillFloor(-27, 26, -18, 27);
         grid.FillFloor(-19, 13, -18, 25);
 
-        // Doors
+        // Doors for first level
         grid.SetTile(-29, 14, "door");
         grid.SetTile(-29, 17, "door");
         grid.SetTile(-26, 19, "door");
