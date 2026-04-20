@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DigitalWorlds.StarterPackage3D;
 using DigitalWorlds.Dialogue;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private HeartbeatUI heartbeat;
+    [SerializeField] private GameObject heartbeatSystem;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private GridManager grid;
     [SerializeField] private TextMeshProUGUI indicator;
@@ -22,6 +24,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Transform facingLight;
+
+    [Header("Player Settings")]
+    [SerializeField] private int startX;
+    [SerializeField] private int startY;
+
     public InputActionAsset asset;
     InputActionMap inputActions;
     InputAction move;
@@ -48,6 +55,10 @@ public class PlayerMove : MonoBehaviour
         inputActions.Enable();
 
         inventory = FindFirstObjectByType<Inventory>();
+        position = (startX, startY);
+        prevPosition = position;
+        gameObject.transform.position = new Vector3(startX, 0.35f, startY);
+
 
         StartCoroutine(Move());
     }
@@ -65,8 +76,15 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator Move()
     {
-        monsterWait = true;
-        direction = move.ReadValue<Vector2>();
+        if (!heartbeat.checkRunning())
+        {
+            monsterWait = false;
+        }
+        else
+        {
+            monsterWait = true;
+        }
+            direction = move.ReadValue<Vector2>();
         bool idlePressed = false;
 
         while (direction != Vector2.zero)
@@ -74,15 +92,19 @@ public class PlayerMove : MonoBehaviour
             direction = move.ReadValue<Vector2>();
             yield return null;
         }
-        while (direction == Vector2.zero && !idlePressed)
+        while ((direction == Vector2.zero && !idlePressed) || !heartbeat.checkRunning())
         {
             direction = move.ReadValue<Vector2>();
             idlePressed = idle.WasPressedThisFrame();
             yield return null;
         }
         if (
-            (heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f))
+            ((heartbeat.getProgress() <= threshold / 2f || heartbeat.getProgress() >= 1 - threshold / 2f)))
         {
+            if (!heartbeat.checkRunning())
+            {
+                idlePressed = true;
+            }
             // Check for idle
             if (idlePressed)
             {
@@ -105,14 +127,15 @@ public class PlayerMove : MonoBehaviour
                     int sign = (int)Mathf.Sign(direction.y);
                     facing.Item2 = sign;
                     updateFacingLightY();
-                    if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "floor")
+                    
+                    if (grid.GetTile(position.Item1, position.Item2 + 1 * sign) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1, position.Item2 + 1 * sign);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1, position.Item2 + 1 * sign) == "door")
+                    else if (grid.GetTile(position.Item1, position.Item2 + 1 * sign) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1, position.Item2 + 1 * sign);
                         if (door != null)
@@ -131,19 +154,20 @@ public class PlayerMove : MonoBehaviour
                         facing.Item1 = sign;
                     }
                     updateFacingLightX();
-
-                    if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "floor")
+                    Debug.Log(grid.GetTile(-5, 0));
+                    if (grid.GetTile(position.Item1 + 1 * sign, position.Item2) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1 + 1 * sign, transform.position.y, position.Item2);
                         transform.position = Vector3.MoveTowards(transform.position, target, 2.5f);
                         position = (position.Item1 + 1 * sign, position.Item2);
                     }
                     // For door tiles, ensure door tile exists at coordinates and try unlocking it if it does
-                    else if (grid.gridObject.CheckSpace(position.Item1 + 1 * sign, position.Item2) == "door")
+                    else if (grid.GetTile(position.Item1 + 1 * sign, position.Item2) == "door")
                     {
                         Lock3D door = grid.CheckDoor(position.Item1 + 1 * sign, position.Item2);
                         if (door != null)
                         {
+                            Debug.Log("hi");
                             door.TryUnlock(inventory, direction);
                         }
                     }
@@ -166,7 +190,7 @@ public class PlayerMove : MonoBehaviour
                 indicator.color = Color.red;
             }
             // Increase BPM
-            if (heartbeat.getBPM() < 160)
+            if (heartbeat.getBPM() < 160 && heartbeat.checkRunning())
             {
                 if (!DialogueManager.AnyDialogueActive)
                 {
@@ -197,7 +221,7 @@ public class PlayerMove : MonoBehaviour
         float currentProgress = heartbeat.getProgress();
 
         // When the beat threshold ends, checks if the player inputted
-        if (currentProgress < (1 - threshold / 2f) && lastProgress >= (1 - threshold / 2f))
+        if (currentProgress < (1 - threshold / 2f) && lastProgress >= (1 - threshold / 2f) && heartbeat.checkRunning())
         {
             if (firstBeat)
             {
@@ -237,5 +261,10 @@ public class PlayerMove : MonoBehaviour
     public bool getMonsterWait()
     {
         return monsterWait;
+    }
+
+    public void setFirstBeat(bool i)
+    {
+        firstBeat = i;
     }
 }

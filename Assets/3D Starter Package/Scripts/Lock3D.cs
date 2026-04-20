@@ -130,7 +130,7 @@ namespace DigitalWorlds.StarterPackage3D
         {
             if (isUnlocked) return;
             isUnlocked = true;
-            gridManager.gridObject.SetSpace(gridX, gridY, "floor");
+            gridManager.SetTile(gridX, gridY, "floor");
             GetComponent<Collider>().enabled = false;
             GetComponentInChildren<Collider>().enabled = false;
             if (doorTransform != null && playerEntersFrom != Facing.East)
