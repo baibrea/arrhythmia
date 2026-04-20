@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private GridManager grid;
     [SerializeField] private TextMeshProUGUI indicator;
+    [SerializeField] private MonitorFlicker monitorSystem;
 
     [Header("BPM Settings")]
     [SerializeField] private float threshold = 0.2f;
@@ -240,6 +241,9 @@ public class PlayerMove : MonoBehaviour
                         heartbeat.setBPM(heartbeat.getBPM() + increaseAmount);
                     }
                 }
+
+                // Make monitors flicker
+                monitorSystem.TriggerRedFlash();
             }
             playerInputted = false;
             currBeatFailed = false;

@@ -34,8 +34,16 @@ public class LevelBuilder : MonoBehaviour
         // Second Level
         grid.FillFloor(-16, 11, -11, 20);
 
-        // Third Level
-        grid.FillFloor(-9, 11, -2, 18);
+        // Screens Room
+        grid.FillFloor(-9, 11, -2, 18); // Entry Room
+        grid.FillFloor(-1, 16, 0, 18); // Walkway to 2nd room
+        grid.FillFloor(1, 11, 10, 22); // 2nd room
+        grid.FillFloor(-1, 6, 10, 9); // 3rd bottom area
+        grid.FillFloor(7, 10, 10, 10); // Connecting line to 3rd bottom area
+
+        // Screens Room Exit Path
+        // TODO: make it appear after the player collects the key
+        grid.FillFloor(-7, 7, -1, 8);
     }
 
 }
