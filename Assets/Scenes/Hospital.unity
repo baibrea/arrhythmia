@@ -39488,7 +39488,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -60318,6 +60318,11 @@ MonoBehaviour:
   moveInterval: 6
   spriteTransform: {fileID: 210369753}
   jumpscare: {fileID: 321179274}
+  playerTransform: {fileID: 0}
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 0
+  sightDistance: 20
 --- !u!4 &1360827261
 Transform:
   m_ObjectHideFlags: 0
