@@ -25,31 +25,6 @@ public class GridManager : MonoBehaviour
     [Header("Door Settings")]
     public Dictionary<(int, int), Lock3D> doors = new Dictionary<(int, int), Lock3D>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
-    {
-        // gridObject = new Grid(space1, space2, parent, generatePrefabs);
-        // gridObject.CreateFloorBox(-14, -3, 4, 3);
-        // Very temporary code for the walls & props in the starting room
-        /*
-        gridObject.SetSpace(-5, -3, "wall");
-        gridObject.SetSpace(-5, -2, "wall");
-        gridObject.SetSpace(-5, -1, "wall");
-        gridObject.SetSpace(-5, 1, "wall");
-        gridObject.SetSpace(-5, 2, "wall");
-        gridObject.SetSpace(-5, 3, "wall");
-        gridObject.SetSpace(3, -3, "wall");
-        gridObject.SetSpace(3, -2, "wall");
-        gridObject.SetSpace(3, 3, "wall");
-        gridObject.SetSpace(4, 3, "wall");
-        gridObject.SetSpace(4, 2, "wall");
-        gridObject.SetSpace(-1, -2, "wall");
-        gridObject.SetSpace(-2, -2, "wall");
-        gridObject.SetSpace(0, 2, "wall");
-        */
-
-    }
-
     // RegisterDoor() initalizes a space in the grid as a door type, then adds it to the doors dictionary
     public void RegisterDoor(int x, int y, Lock3D door)
     {
@@ -126,65 +101,3 @@ public class GridManager : MonoBehaviour
     }
 
 }
-
-/*
-[Serializable]
-public class Grid
-{
-
-    private Dictionary<(int, int), String> grid;
-    private GameObject space1;
-    private GameObject space2;
-    private GameObject parent;
-    private bool generatePrefabs;
-
-    public Grid(GameObject space1, GameObject space2, GameObject parent, bool generatePrefabs)
-    {
-        this.space1 = space1;
-        this.space2 = space2;
-        this.parent = parent;
-        this.grid = new Dictionary<(int, int), String>();
-        this.generatePrefabs = generatePrefabs;
-    }
-
-    public String CheckSpace(int x, int y)
-    {
-        if (grid.ContainsKey((x, y)))
-        {
-            return grid[(x, y)];
-        }
-        else
-        {
-            return "wall";
-        }
-    }
-
-    public void SetSpace(int x, int y, String type)
-    {
-        grid[(x, y)] = type;
-    }
-
-    public void CreateFloorBox(int x1, int y1, int x2, int y2)
-    {
-        for (int i = x1; i <= x2; i++)
-        {
-            for (int j = y1; j <= y2; j++)
-            {
-                grid[(i, j)] = "floor";
-                if (generatePrefabs)
-                {
-                    if ((i + j) % 2 == 0)
-                    {
-                        GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                    }
-                    else
-                    {
-                        GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                    }
-                }
-
-            }
-        }
-    }
-}
-*/
