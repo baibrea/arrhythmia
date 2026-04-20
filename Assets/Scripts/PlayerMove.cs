@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
     private bool currBeatFailed = false;
     private (int, int) facing = (-1, -1);
     private bool monsterWait = false;
+    private bool inCloset = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -270,5 +271,15 @@ public class PlayerMove : MonoBehaviour
     public void setFirstBeat(bool i)
     {
         firstBeat = i;
+    }
+
+    public void toggleCloset(bool b)
+    {
+        inCloset = b;
+    }
+
+    public bool checkCloset()
+    {
+        return inCloset;
     }
 }
