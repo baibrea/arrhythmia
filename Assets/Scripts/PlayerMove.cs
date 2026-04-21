@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Transform facingLight;
+    [SerializeField] private Flashlight flashlight;
 
     [Header("Player Settings")]
     [SerializeField] private int startX;
@@ -33,6 +34,7 @@ public class PlayerMove : MonoBehaviour
     InputActionMap inputActions;
     InputAction move;
     InputAction idle;
+    InputAction flash;
     private Vector2 direction;
     private float speed;
     private Inventory inventory;
@@ -53,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         inputActions = asset.FindActionMap("Move");
         move = inputActions.FindAction("WASD");
         idle = inputActions.FindAction("Idle");
+        flash = inputActions.FindAction("Flashlight");
         inputActions.Enable();
 
         inventory = FindFirstObjectByType<Inventory>();
@@ -93,7 +96,7 @@ public class PlayerMove : MonoBehaviour
             direction = move.ReadValue<Vector2>();
             yield return null;
         }
-        while ((direction == Vector2.zero && !idlePressed) || !heartbeat.checkRunning())
+        while ((direction == Vector2.zero && !idlePressed && !flash.WasPressedThisFrame()) || !heartbeat.checkRunning())
         {
             direction = move.ReadValue<Vector2>();
             idlePressed = idle.WasPressedThisFrame();
@@ -114,7 +117,12 @@ public class PlayerMove : MonoBehaviour
                     indicator.text = "IDLE SUCCESS";
                     indicator.color = Color.yellow;
                 }
-
+                playerInputted = true;
+            } 
+            else if (flash.WasPressedThisFrame())
+            {
+                Debug.Log("Flashlight Pressed");
+                flashlight.Flash();
                 playerInputted = true;
             }
             // Move player
@@ -128,7 +136,7 @@ public class PlayerMove : MonoBehaviour
                     int sign = (int)Mathf.Sign(direction.y);
                     facing.Item2 = sign;
                     updateFacingLightY();
-                    
+
                     if (grid.GetTile(position.Item1, position.Item2 + 1 * sign) == "floor")
                     {
                         Vector3 target = new Vector3(position.Item1, transform.position.y, position.Item2 + 1 * sign);
