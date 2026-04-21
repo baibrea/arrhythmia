@@ -61,7 +61,15 @@ public class PlayerMove : MonoBehaviour
         inputActions.Enable();
 
         inventory = FindFirstObjectByType<Inventory>();
-        position = (startX, startY);
+        if (SkipTutorial.skipped)
+        {
+            position = (startX, startY);
+        }
+        else
+        {
+            startX = 0;
+            startY = 0;
+        }
         prevPosition = position;
         gameObject.transform.position = new Vector3(startX, 0.35f, startY);
 

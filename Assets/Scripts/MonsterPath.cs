@@ -55,6 +55,10 @@ public class MonsterPath : MonoBehaviour
         lastSeenPlayerPos = GetRandomFloorTile();
         mat.SetColor("_EmissionColor", new Color(191 / 255f, 12 / 255f, 12 / 255f) * 5);
         trigger = GetComponent<DialogueTrigger>();
+        if (SkipTutorial.skipped)
+        {
+            BeginChase();
+        }
     }
 
     public void AlertMonster()
