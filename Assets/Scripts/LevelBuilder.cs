@@ -54,6 +54,10 @@ public class LevelBuilder : MonoBehaviour
 
         // Screens Room Exit Path
         // TODO: make it appear after the player collects the key
+    }
+
+    public void BuildShortcut()
+    {
         grid.FillFloor(-7, 7, -2, 7);
     }
 
