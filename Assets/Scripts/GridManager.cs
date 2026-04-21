@@ -71,17 +71,17 @@ public class GridManager : MonoBehaviour
             {
                 SetTile(i, j, "floor");
 
-                if (generatePrefabs)
-                {
-                    if ((i + j) % 2 == 0)
-                    {
-                        GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                    }
-                    else
-                    {
-                        GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
-                    }
-                }
+                //if (generatePrefabs)
+                //{
+                //    if ((i + j) % 2 == 0)
+                //    {
+                //        GameObject.Instantiate(space1, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                //    }
+                //    else
+                //    {
+                //        GameObject.Instantiate(space2, new Vector3(i, 0, j), Quaternion.identity, parent.transform);
+                //    }
+                //}
 
             }
         }

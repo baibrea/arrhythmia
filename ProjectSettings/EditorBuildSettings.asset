@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: aab78a91046728c4bbc96d0db605cae6
   - enabled: 1
-    path: Assets/Scenes/Monster.unity
-    guid: 0a5c2dd5bd4cebe4f9f0d23f173f9d9a
+    path: Assets/Scenes/Main Level.unity
+    guid: 9ba1a2efcd02c7c4ba68eaebf1fe5d46
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 0c6877e81ec1b7346adcc8c90ca29300

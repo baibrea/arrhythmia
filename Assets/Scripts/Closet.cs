@@ -38,6 +38,7 @@ public class Closet : MonoBehaviour
     private float bpm;
     private bool canInteract = true;
     private bool insideTrigger = false;
+    private bool game = false;
     private int misses = 0;
     private RectTransform windowRect;
     private AudioSource pulseSource;
@@ -65,7 +66,7 @@ public class Closet : MonoBehaviour
         bpm = heartbeat.getBPM();
         if (prompt.enabled)
         {
-            if (interact.WasPressedThisFrame() && canInteract)
+            if (interact.WasPressedThisFrame() && canInteract && insideTrigger)
             {
                 StartCoroutine(InteractCooldown(0.3f));
                 prompt.enabled = false;
@@ -74,6 +75,7 @@ public class Closet : MonoBehaviour
                 playerMove.toggleCloset(true);
                 heartbeat.stopRunning();
                 rhythmUI.SetActive(true);
+                game = true;
                 misses = 0;
                 StartCoroutine(RhythmGame(0.5f));
             }
@@ -230,7 +232,7 @@ public class Closet : MonoBehaviour
                 Destroy(child.gameObject);
             }
             rhythmUI.SetActive(false);
-            heartbeat.startRunning();
+            heartbeat.startRunning(0.5f);
         }
         if (misses == 3)
         {
