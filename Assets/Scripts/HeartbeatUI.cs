@@ -77,7 +77,6 @@ public class HeartbeatUI : MonoBehaviour
             heart.color = Color.white;
             float interval = 60f / bpm;
             float timer = interval + startDelay;
-            StartCoroutine(HeartbeatSound(interval + startDelay));
             Image leftImage = left.GetComponent<Image>();
             Image rightImage = right.GetComponent<Image>();
             Image left1Image = left1.GetComponent<Image>();
@@ -104,6 +103,11 @@ public class HeartbeatUI : MonoBehaviour
                 else
                 {
                     heart.color = Color.white;
+                }
+
+                if (timer <= 0.02f && timer > 0f)
+                {
+                    PlayHeartbeatSound();
                 }
             }
             UpdateQueue();
@@ -245,5 +249,10 @@ public class HeartbeatUI : MonoBehaviour
     public bool checkRunning()
     {
         return isRunning;
+    }
+
+    void PlayHeartbeatSound()
+    {
+        sound.PlayOneShot(sound.clip, 2.5f);
     }
 }

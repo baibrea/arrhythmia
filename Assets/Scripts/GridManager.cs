@@ -9,7 +9,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject space1;
     [SerializeField] private GameObject space2;
     [SerializeField] private GameObject parent;
-    [SerializeField] private bool generatePrefabs = true;
+    [SerializeField] private bool generatePrefabs = false;
 
      /* 
     Key is a pair representing the xy coordinate of the grid space
@@ -87,16 +87,14 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void FillWalls(int x1, int y1, int x2, int y2)
+    public void FillWall(int x1, int y1, int x2, int y2)
     {
-        for (int i = x1; i <= x2; i++) {
-            SetTile(i, y1, "wall");
-            SetTile(i, y2, "wall");
-        }
-
-        for (int j = y1; j <= y2; j++) {
-            SetTile(x1, j, "wall");
-            SetTile(x2, j, "wall");
+        for (int i = x1; i <= x2; i++)
+        {
+            for (int j = y1; j <= y2; j++)
+            {
+                SetTile(i, j, "wall");
+            }
         }
     }
 
