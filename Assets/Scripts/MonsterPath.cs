@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DigitalWorlds.StarterPackage3D;
+using DigitalWorlds.Dialogue;
 
 public class MonsterPath : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MonsterPath : MonoBehaviour
     [SerializeField] int moveInterval = 3;
 
     [SerializeField] private Transform spriteTransform;
+    [SerializeField] private Material mat;
     [SerializeField] private Jumpscare jumpscare;
 
     [Header("Vision")]
@@ -19,11 +21,14 @@ public class MonsterPath : MonoBehaviour
     [SerializeField] LayerMask sightMask;
     [SerializeField] float sightDistance = 20f;
 
-    private (int, int) position = (-2, 2);
+    private (int, int) position;
     private (int, int) lastSeenPlayerPos;
 
     private int count = 0;
     private bool start = false;
+    private bool wandering = true;
+    private bool stunned = false;
+    private DialogueTrigger trigger;
 
     private List<(int, int)> currentPath;
 
@@ -46,7 +51,14 @@ public class MonsterPath : MonoBehaviour
 
     void Start()
     {
-        lastSeenPlayerPos = PlayerMove.GetPreviousPosition();
+        position = ((int) transform.position.x, (int) transform.position.z);
+        lastSeenPlayerPos = GetRandomFloorTile();
+        mat.SetColor("_EmissionColor", new Color(191 / 255f, 12 / 255f, 12 / 255f) * 5);
+        trigger = GetComponent<DialogueTrigger>();
+        if (SkipTutorial.skipped)
+        {
+            BeginChase();
+        }
     }
 
     public void AlertMonster()
@@ -59,7 +71,7 @@ public class MonsterPath : MonoBehaviour
     {
         if (!start) return;
 
-        if (heartbeat.getCount() % moveInterval == moveInterval - 1)
+        if (heartbeat.getCount() % moveInterval == moveInterval - 1 && !stunned)
             spriteTransform.localPosition = Random.insideUnitSphere * 0.1f;
         else
             spriteTransform.localPosition = Random.insideUnitSphere * 0.01f;
@@ -83,13 +95,19 @@ public class MonsterPath : MonoBehaviour
 
         if (heartbeat.getCount() % moveInterval == 0 &&
             count != heartbeat.getCount() &&
-            !PlayerMove.getMonsterWait())
+            !PlayerMove.getMonsterWait() && !stunned)
         {
             count = heartbeat.getCount();
 
             if (CanSeePlayer())
             {
                 lastSeenPlayerPos = PlayerMove.GetCurrentPosition();
+                if (wandering)
+                {
+                    wandering = false;
+                    trigger.TriggerDialogue();
+
+                }
             }
 
             if (position == lastSeenPlayerPos)
@@ -97,6 +115,7 @@ public class MonsterPath : MonoBehaviour
                 if (!CanSeePlayer())
                 {
                     lastSeenPlayerPos = GetRandomFloorTile();
+                    wandering = true;
                 }
             }
 
@@ -134,12 +153,13 @@ public class MonsterPath : MonoBehaviour
 
         if (Physics.Raycast(origin, dir, out hit, sightDistance, sightMask))
         {
-            if (hit.transform == playerTransform)
+            if (hit.transform == playerTransform) {
                 if (PlayerMove.checkCloset())
                 {
                     return false;
                 }
                 return true;
+            }    
         }
 
         return false;
@@ -251,4 +271,26 @@ public class MonsterPath : MonoBehaviour
 
         return position;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerAttack") && !stunned)
+        {
+            stunned = true;
+            StartCoroutine(WaitStun(4));
+        }
+    }
+
+    IEnumerator WaitStun(int duration)
+    {
+        int startCount = heartbeat.getCount();
+        mat.SetColor("_EmissionColor", Color.orange * 2);
+        while (heartbeat.getCount() <= startCount + duration)
+        {
+            yield return null;
+        }
+        stunned = false;
+        mat.SetColor("_EmissionColor", new Color(191/255f, 12/255f, 12/255f) * 5);
+    }
+
 }
