@@ -1,61 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraWall : MonoBehaviour
+public class CameraWall: MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private LayerMask wallMask;
+    public Transform player;
 
-    private HashSet<Renderer> currentlyHidden = new HashSet<Renderer>();
-    private HashSet<Renderer> nextHidden = new HashSet<Renderer>();
+    [SerializeField] LayerMask wallMask;
+
+    [Header("Ray Offsets")]
+    [SerializeField] float sideOffset = 0.5f;
+    [SerializeField] float topOffset = 1f;
+
+    private HashSet<MeshRenderer> hiddenRenderers = new HashSet<MeshRenderer>();
 
     void LateUpdate()
     {
-        nextHidden.Clear();
+        // Re-enable all renderers from last frame
+        foreach (var r in hiddenRenderers)
+        {
+            if (r)
+                r.enabled = true;
+        }
+
+        hiddenRenderers.Clear();
 
         Vector3 camPos = transform.position;
         Vector3 playerPos = player.position;
 
-        Vector3 dir = playerPos - camPos;
+        Vector3 right = transform.right;
+
+        CastRay(camPos, playerPos);
+        CastRay(camPos, playerPos + right * sideOffset);
+        CastRay(camPos, playerPos - right * sideOffset);
+        CastRay(camPos, playerPos + Vector3.up * topOffset);
+    }
+
+    void CastRay(Vector3 origin, Vector3 target)
+    {
+        Vector3 dir = target - origin;
         float dist = dir.magnitude;
 
-        Ray ray = new Ray(camPos, dir.normalized);
-        RaycastHit[] hits = Physics.RaycastAll(ray, dist, wallMask);
+        RaycastHit[] hits = Physics.RaycastAll(origin, dir.normalized, dist, wallMask);
 
         foreach (var hit in hits)
         {
-            Renderer r = hit.collider.GetComponent<Renderer>();
-            if (r != null)
-                nextHidden.Add(r);
-        }
+            MeshRenderer mr = hit.collider.GetComponent<MeshRenderer>();
 
-        foreach (var r in nextHidden)
-        {
-            if (!currentlyHidden.Contains(r))
+            if (mr && mr.enabled)
             {
-                SetVisible(r, false);
+                mr.enabled = false;
+                hiddenRenderers.Add(mr);
             }
-        }
-        foreach (var r in currentlyHidden)
-        {
-            if (!nextHidden.Contains(r))
-            {
-                SetVisible(r, true);
-            }
-        }
-
-        var temp = currentlyHidden;
-        currentlyHidden = nextHidden;
-        nextHidden = temp;
-    }
-
-    void SetVisible(Renderer r, bool visible)
-    {
-        foreach (var mat in r.materials)
-        {
-            Color c = mat.color;
-            c.a = visible ? 1f : 0.4f;
-            mat.color = c;
         }
     }
 }
