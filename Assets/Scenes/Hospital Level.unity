@@ -5428,9 +5428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: 0.5
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &97494823
 GameObject:
   m_ObjectHideFlags: 0
@@ -7325,9 +7328,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: 0.5
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &138694219
 GameObject:
   m_ObjectHideFlags: 0
@@ -8631,9 +8637,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: 0.5
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &168950041
 GameObject:
   m_ObjectHideFlags: 0
@@ -12670,9 +12679,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: -2
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &269080404
 GameObject:
   m_ObjectHideFlags: 0
@@ -15324,7 +15336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d6c689ccf4a3145acc96387a321e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  duration: 0.3
   ChangeScene: {fileID: 494888773}
 --- !u!1 &323437475
 GameObject:
@@ -34548,9 +34559,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: 0.5
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &712614717
 GameObject:
   m_ObjectHideFlags: 0
@@ -35127,7 +35141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
   defaultValue: 0
   preferenceKey: BPMPref
-  toggle: {fileID: 1759983477}
+  toggle: {fileID: 0}
   elements:
   - {fileID: 1916296771}
 --- !u!114 &718115486
@@ -35144,7 +35158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToggleManager
   defaultValue: 1
   preferenceKey: IndicatorsPref
-  toggle: {fileID: 1759983478}
+  toggle: {fileID: 0}
   elements:
   - {fileID: 1218388422}
   - {fileID: 856781900}
@@ -68472,9 +68486,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: -2
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &1360827259
 GameObject:
   m_ObjectHideFlags: 0
@@ -68509,6 +68526,7 @@ MonoBehaviour:
   grid: {fileID: 2080224531}
   moveInterval: 3
   spriteTransform: {fileID: 210369753}
+  mat: {fileID: 0}
   jumpscare: {fileID: 321179274}
   playerTransform: {fileID: 1719653921}
   sightMask:
@@ -88878,11 +88896,13 @@ MonoBehaviour:
   cameraShake: {fileID: 1548982531}
   grid: {fileID: 2080224531}
   indicator: {fileID: 362469944}
+  monitorSystem: {fileID: 0}
   threshold: 0.3
   increaseAmount: 5
   animator: {fileID: 1259950218}
   playerSprite: {fileID: 1259950219}
   facingLight: {fileID: 2139725486}
+  flashlight: {fileID: 0}
   startX: 0
   startY: 0
   asset: {fileID: -944628639613478452, guid: 8fc7c8686a8b6b34cbab53d8d8cd2f61, type: 3}
@@ -90707,9 +90727,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 84189579}
     m_Modifications:
+    - target: {fileID: 262660511152377875, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 262660511152377875, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 262660511152377875, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1364562342370898950, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_Name
       value: Settings Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960963188777098892, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960963188777098892, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798343902578223030, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798343902578223030, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798343902578223030, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4803521604279311885, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
       propertyPath: m_Pivot.x
@@ -90791,6 +90843,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5925688504049353224, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925688504049353224, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907499996055763890, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907499996055763890, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907499996055763890, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493001090628893594, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493001090628893594, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -90801,28 +90881,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4803521604279311885, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
   m_PrefabInstance: {fileID: 1759983475}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1759983477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7634540629889995059, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
---- !u!114 &1759983478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1235152472124472771, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
-  m_PrefabInstance: {fileID: 1759983475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!114 &1759983479 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 927453278258525810, guid: 9de57b6cacbb371478a6cfdd9414422e, type: 3}
@@ -95124,9 +95182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: -2
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &1861809534
 GameObject:
   m_ObjectHideFlags: 0
@@ -97888,9 +97949,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: -2
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!1 &1904925289
 GameObject:
   m_ObjectHideFlags: 0
@@ -113248,9 +113312,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1358637eda91744a7ff6abb7127c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorFlicker
+  flashOnMissGroup: {fileID: 0}
+  normalGroup: {fileID: 0}
   minIntensity: 0.5
   maxIntensity: 2
-  flickerSpeed: 0.1
+  missFlashIntensity: 4
+  missFlashDuration: 0.1
 --- !u!23 &3413730403350271952
 MeshRenderer:
   m_ObjectHideFlags: 0

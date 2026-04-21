@@ -62,11 +62,11 @@ public class LevelBuilder : MonoBehaviour
         grid.FillFloor(-23, 28, -23, 28);
 
         // Doors for hospital level
-        // grid.SetTile(-29, 14, "door");
-        // grid.SetTile(-29, 17, "door");
-        // grid.SetTile(-26, 19, "door");
-        // grid.SetTile(-25, 22, "door");
-        // grid.SetTile(-23, 28, "door");
+        grid.SetTile(-29, 14, "door");
+        grid.SetTile(-29, 17, "door");
+        grid.SetTile(-26, 19, "door");
+        grid.SetTile(-26, 22, "door");
+        grid.SetTile(-23, 28, "door");
 
         // Walls for hospital level
         grid.SetTile(-32, 16, "wall");
