@@ -51,6 +51,11 @@ public class CameraWall : MonoBehaviour
 
     void SetVisible(Renderer r, bool visible)
     {
-        r.enabled = visible;
+        foreach (var mat in r.materials)
+        {
+            Color c = mat.color;
+            c.a = visible ? 1f : 0.4f;
+            mat.color = c;
+        }
     }
 }
