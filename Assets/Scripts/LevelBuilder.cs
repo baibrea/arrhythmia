@@ -33,6 +33,7 @@ public class LevelBuilder : MonoBehaviour
     {
         // Hub
         grid.FillFloor(-21, 0, -6, 3);
+        grid.SetTile(-10, 3, "wall");
 
         // Hallways
         grid.FillFloor(-19, 4, -18, 10);
@@ -103,6 +104,9 @@ public class LevelBuilder : MonoBehaviour
         grid.SetTile(-28, 21, "wall");
         grid.SetTile(-28, 22, "wall");
 
+        // Closet for hospital level
+        grid.SetTile(-33, 18, "wall");
+
         // Second Level
         grid.FillFloor(-16, 11, -11, 20);
 
@@ -118,6 +122,8 @@ public class LevelBuilder : MonoBehaviour
         grid.SetTile(-9, 18, "wall");
         grid.SetTile(-6, 11, "wall");
         grid.SetTile(-2, 11, "wall");
+        // Screen room closet
+        grid.SetTile(10, 16, "wall");
 
         grid.FillFloor(1, 12, 10, 22); // 2nd room floor
         grid.FillWall(3, 19, 4, 19); // 2nd room, top left wall

@@ -10,7 +10,10 @@ public class MonsterPath : MonoBehaviour
     [SerializeField] HeartbeatUI heartbeat;
     [SerializeField] GridManager grid;
 
-    [SerializeField] int moveInterval = 3;
+    [Header("Movement Speed")]
+    [SerializeField] int closeMoveInterval = 3;
+    [SerializeField] int farMoveInterval = 1;
+    [SerializeField] float speedDistance = 10f;
 
     [SerializeField] private Transform spriteTransform;
     [SerializeField] private Material mat;
@@ -19,7 +22,6 @@ public class MonsterPath : MonoBehaviour
     [Header("Vision")]
     [SerializeField] Transform playerTransform;
     [SerializeField] LayerMask sightMask;
-    [SerializeField] float sightDistance = 20f;
 
     private (int, int) position;
     private (int, int) lastSeenPlayerPos;
@@ -51,10 +53,11 @@ public class MonsterPath : MonoBehaviour
 
     void Start()
     {
-        position = ((int) transform.position.x, (int) transform.position.z);
+        position = ((int)transform.position.x, (int)transform.position.z);
         lastSeenPlayerPos = GetRandomFloorTile();
         mat.SetColor("_EmissionColor", new Color(191 / 255f, 12 / 255f, 12 / 255f) * 5);
         trigger = GetComponent<DialogueTrigger>();
+
         if (SkipTutorial.skipped)
         {
             BeginChase();
@@ -71,7 +74,10 @@ public class MonsterPath : MonoBehaviour
     {
         if (!start) return;
 
-        if (heartbeat.getCount() % moveInterval == moveInterval - 1 && !stunned)
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        int currentMoveInterval = distanceToPlayer > speedDistance ? farMoveInterval : closeMoveInterval;
+
+        if (heartbeat.getCount() % currentMoveInterval == currentMoveInterval - 1 && !stunned)
             spriteTransform.localPosition = Random.insideUnitSphere * 0.1f;
         else
             spriteTransform.localPosition = Random.insideUnitSphere * 0.01f;
@@ -93,7 +99,10 @@ public class MonsterPath : MonoBehaviour
             yield return new WaitForSeconds(5);
         }
 
-        if (heartbeat.getCount() % moveInterval == 0 &&
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        int currentMoveInterval = distanceToPlayer > speedDistance ? farMoveInterval : closeMoveInterval;
+
+        if (heartbeat.getCount() % currentMoveInterval == 0 &&
             count != heartbeat.getCount() &&
             !PlayerMove.getMonsterWait() && !stunned)
         {
@@ -102,11 +111,11 @@ public class MonsterPath : MonoBehaviour
             if (CanSeePlayer())
             {
                 lastSeenPlayerPos = PlayerMove.GetCurrentPosition();
+
                 if (wandering)
                 {
                     wandering = false;
                     trigger.TriggerDialogue();
-
                 }
             }
 
@@ -149,17 +158,15 @@ public class MonsterPath : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * 0.5f;
         Vector3 dir = (playerTransform.position - origin).normalized;
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(origin, dir, out hit, sightDistance, sightMask))
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, Mathf.Infinity, sightMask))
         {
-            if (hit.transform == playerTransform) {
+            if (hit.transform == playerTransform)
+            {
                 if (PlayerMove.checkCloset())
-                {
                     return false;
-                }
+
                 return true;
-            }    
+            }
         }
 
         return false;
@@ -281,16 +288,34 @@ public class MonsterPath : MonoBehaviour
         }
     }
 
+    public void ForceStun(bool s)
+    {
+        stunned = s;
+    }
+
     IEnumerator WaitStun(int duration)
     {
         int startCount = heartbeat.getCount();
         mat.SetColor("_EmissionColor", Color.orange * 2);
+
         while (heartbeat.getCount() <= startCount + duration)
         {
             yield return null;
         }
+
         stunned = false;
-        mat.SetColor("_EmissionColor", new Color(191/255f, 12/255f, 12/255f) * 5);
+        mat.SetColor("_EmissionColor", new Color(191 / 255f, 12 / 255f, 12 / 255f) * 5);
+    }
+
+    public void setMoveInterval(int interval)
+    {
+        closeMoveInterval = interval;
+    }
+
+    public void ChangePositon(int X, int Y)
+    {
+        transform.position = new Vector3(X, transform.position.y, Y);
+        position = (X, Y);
     }
 
 }

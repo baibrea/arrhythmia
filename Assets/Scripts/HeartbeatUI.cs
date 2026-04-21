@@ -230,12 +230,12 @@ public class HeartbeatUI : MonoBehaviour
         line.GetComponent<Image>().enabled = false;
     }
 
-    public void startRunning()
+    public void startRunning(float delay)
     {
         StopAllCoroutines();
         playerMove.setFirstBeat(true);
         isRunning = true;
-        StartCoroutine(Heartbeat(0.5f));
+        StartCoroutine(Heartbeat(delay));
         heartObject.GetComponent<Image>().enabled = true;
         left.GetComponent<Image>().enabled = true;
         left1.GetComponent<Image>().enabled = true;
