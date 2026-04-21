@@ -38,17 +38,19 @@ public class LevelBuilder : MonoBehaviour
 
         // Rooms for first level
         grid.FillFloor(-28, 11, -18, 12);
-        grid.FillFloor(-34, 13, -30, 18);
+        grid.FillFloor(-36, 13, -30, 18);
         grid.FillFloor(-28, 13, -27, 27);
         grid.FillFloor(-25, 18, -21, 23);
         grid.FillFloor(-27, 26, -18, 27);
         grid.FillFloor(-19, 13, -18, 25);
+        grid.FillFloor(-26, 29, -20, 35);
 
         // Doors for first level
         grid.SetTile(-29, 14, "door");
         grid.SetTile(-29, 17, "door");
         grid.SetTile(-26, 19, "door");
-        grid.SetTile(-26, 22, "door");
+        grid.SetTile(-25, 22, "door");
+        grid.SetTile(-23, 28, "door");
 
         // Walls
 
