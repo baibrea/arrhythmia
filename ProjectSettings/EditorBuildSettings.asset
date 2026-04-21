@@ -5,21 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Title Screen.unity
     guid: aab78a91046728c4bbc96d0db605cae6
-  - enabled: 0
-    path: Assets/Scenes/0.unity
-    guid: 60ccde110b7c2bc4e8dadedf2a3cbe4d
   - enabled: 1
-    path: Assets/Scenes/Sprite + Lighting.unity
-    guid: 736d54adc17bf9342b48d4f45a74127f
+    path: Assets/Scenes/Monster.unity
+    guid: 0a5c2dd5bd4cebe4f9f0d23f173f9d9a
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 0c6877e81ec1b7346adcc8c90ca29300
+  - enabled: 1
+    path: Assets/Scenes/Start Cutscene.unity
+    guid: b6ca8c355988c6e4a87baa09d860c46e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8fc7c8686a8b6b34cbab53d8d8cd2f61, type: 3}
   m_UseUCBPForAssetBundles: 0
