@@ -19,8 +19,8 @@ public class LevelBuilder : MonoBehaviour
 
     void BuildLevels()
     {
-        // Main Floor
-        grid.FillFloor(-21, -3, -6, 3);
+        // Hub
+        grid.FillFloor(-21, 0, -6, 3);
 
         // Hallways
         grid.FillFloor(-19, 4, -18, 10);
@@ -51,9 +51,6 @@ public class LevelBuilder : MonoBehaviour
 
         grid.FillFloor(9, 8, 10, 11); // Walkway to final hallway
         grid.FillFloor(-1, 7, 10, 7); // Final hallway
-
-        // Screens Room Exit Path
-        // TODO: make it appear after the player collects the key
     }
 
     public void BuildShortcut()
