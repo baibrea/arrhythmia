@@ -46,6 +46,13 @@ namespace DigitalWorlds.StarterPackage3D
 
         [SerializeField] private Facing playerEntersFrom;
         [SerializeField] private Transform doorTransform;
+        [Tooltip("Adjust the angle that the door opens to match the door's orientation (usually 90f or -90f).")]
+        [SerializeField] private float openAngle = -90f;
+
+        [Header("Double Door Settings")]
+        [Tooltip("Only assign if this door is part of a double door.")]
+        [SerializeField] private Lock3D linkedDoor;
+
 
         [Space(20)]
         [Header("Events")]
@@ -115,13 +122,28 @@ namespace DigitalWorlds.StarterPackage3D
                 {
                     inventory.DeleteItemFromInventory(requiredItemName, requiredItemCount);
                 }
+
                 UnlockDoor();
+
+                if (linkedDoor != null && !linkedDoor.isUnlocked)
+                {
+                    linkedDoor.ForceUnlock();
+                }
+
                 onUnlocked.Invoke();
             }
             else
             {
                 onUnlockFailed.Invoke();
             }
+        }
+
+        // ForceUnlock() is called by the other door
+        public void ForceUnlock()
+        {
+            // The isUnlocked check inside UnlockDoor() prevents infinite loops
+            UnlockDoor();
+            onUnlocked.Invoke();
         }
 
         // UnlockDoor() updates the grid to make the tile traversable, 
@@ -133,16 +155,20 @@ namespace DigitalWorlds.StarterPackage3D
             gridManager.SetTile(gridX, gridY, "floor");
             GetComponent<Collider>().enabled = false;
             GetComponentInChildren<Collider>().enabled = false;
-            if (doorTransform != null && playerEntersFrom != Facing.East)
+            if (doorTransform != null)
             {
-                doorTransform.localRotation = Quaternion.Euler(0, -90f, 0);
+                doorTransform.localRotation = Quaternion.Euler(0, openAngle, 0);
             }
-            else if (doorTransform != null)
-            {
-                doorTransform.localRotation = Quaternion.Euler(0, 90f, 0);
-            }
+            // if (doorTransform != null && playerEntersFrom != Facing.East)
+            // {
+            //     doorTransform.localRotation = Quaternion.Euler(0, -90f, 0);
+            // }
+            // else if (doorTransform != null)
+            // {
+            //     doorTransform.localRotation = Quaternion.Euler(0, 90f, 0);
+            // }
 
-            
+
             // StartCoroutine(RotateDoor());
         }
 
