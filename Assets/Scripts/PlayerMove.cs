@@ -46,6 +46,7 @@ public class PlayerMove : MonoBehaviour
     private (int, int) facing = (-1, -1);
     private bool monsterWait = false;
     private bool inCloset = false;
+    private bool finalScene = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -281,5 +282,10 @@ public class PlayerMove : MonoBehaviour
     public bool checkCloset()
     {
         return inCloset;
+    }
+
+    public void SetFinalScene(bool value)
+    {
+        finalScene = value;
     }
 }

@@ -9,6 +9,9 @@ public class LevelBuilder : MonoBehaviour
     {
         BuildTutorial();
         BuildLevels();
+
+        // TODO: call this when exit doors are unlocked
+        BuildFinalChase();
     }
 
     void BuildTutorial()
@@ -24,15 +27,7 @@ public class LevelBuilder : MonoBehaviour
 
         // Hallways
         grid.FillFloor(-19, 4, -18, 10);
-        grid.FillFloor(-14, 4, -13, 10);
         grid.FillFloor(-9, 4, -8, 10);
-
-        // First Level
-        grid.FillFloor(-25, 11, -18, 17);
-        grid.FillFloor(-28, 15, -23, 20);
-
-        // Second Level
-        grid.FillFloor(-16, 11, -11, 20);
 
         // Screens Room
         grid.FillFloor(-9, 11, -2, 18); // Entry Room
@@ -56,6 +51,11 @@ public class LevelBuilder : MonoBehaviour
     public void BuildShortcut()
     {
         grid.FillFloor(-7, 7, -2, 7);
+    }
+
+    public void BuildFinalChase()
+    {
+        grid.FillFloor(-14, 4, -13, 30);
     }
 
 }
