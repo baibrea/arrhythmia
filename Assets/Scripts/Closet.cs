@@ -1,3 +1,4 @@
+using DigitalWorlds.Dialogue;
 using System;
 using System.Collections;
 using System.Threading;
@@ -20,6 +21,7 @@ public class Closet : MonoBehaviour
     [SerializeField] private GameObject notePrefab;
     [SerializeField] private GameObject window;
     [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private MonsterPath monsterPath;
 
     [Header("Timing Displays")]
     [SerializeField] private Transform timingParent;
@@ -36,8 +38,10 @@ public class Closet : MonoBehaviour
     private float bpm;
     private bool canInteract = true;
     private bool insideTrigger = false;
+    private int misses = 0;
     private RectTransform windowRect;
     private AudioSource pulseSource;
+    private DialogueTrigger dialogueTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +52,7 @@ public class Closet : MonoBehaviour
         inputActions.Enable();
         windowRect = window.GetComponent<RectTransform>();
         pulseSource = GetComponent<AudioSource>();
+        dialogueTrigger = GetComponent<DialogueTrigger>();
         rhythmUI.SetActive(false);
 
         prompt.enabled = false;
@@ -69,6 +74,7 @@ public class Closet : MonoBehaviour
                 playerMove.toggleCloset(true);
                 heartbeat.stopRunning();
                 rhythmUI.SetActive(true);
+                misses = 0;
                 StartCoroutine(RhythmGame(0.5f));
             }
         }
@@ -181,6 +187,7 @@ public class Closet : MonoBehaviour
                     pulseSource.pitch = 0.5f;
                     pulseSource.PlayOneShot(pulseSource.clip);
                     Destroy(currentNote);
+                    misses += 1;
                     yield break;
                 }
             }
@@ -190,7 +197,7 @@ public class Closet : MonoBehaviour
         pulseSource.pitch = 0.5f;
         pulseSource.PlayOneShot(pulseSource.clip);
         Destroy(currentNote);
-
+        misses += 1;
     }
 
     IEnumerator InteractCooldown(float seconds)
@@ -225,6 +232,12 @@ public class Closet : MonoBehaviour
             rhythmUI.SetActive(false);
             heartbeat.startRunning();
         }
+        if (misses == 3)
+        {
+            monsterPath.AlertMonster();
+            misses = 4;
+            dialogueTrigger.TriggerDialogue();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -233,6 +246,7 @@ public class Closet : MonoBehaviour
         canInteract = true;
         prompt.enabled = false;
         playerSprite.enabled = true;
+        misses = 0;
         playerLight.enabled = true;
         playerMove.toggleCloset(false);
         StopAllCoroutines();
