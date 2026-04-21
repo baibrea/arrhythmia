@@ -8,7 +8,7 @@ public class CameraWall: MonoBehaviour
     [SerializeField] LayerMask wallMask;
 
     [Header("Ray Offsets")]
-    [SerializeField] float sideOffset = 1f;
+    [SerializeField] float sideOffset = 0.5f;
     [SerializeField] float topOffset = 1f;
 
     private HashSet<MeshRenderer> hiddenRenderers = new HashSet<MeshRenderer>();

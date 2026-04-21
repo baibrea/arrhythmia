@@ -10,6 +10,8 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform monsterTransform;
     [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip chaseMusic;
     private bool playing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +27,8 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator Cutscene()
     {
         playing = true;
+        audioSource.clip = chaseMusic;
+        audioSource.Play();
         heartbeat.stopRunning();
         monster.ForceStun(true);
         monster.ChangePositon(-13, 10);

@@ -1,6 +1,5 @@
 using DigitalWorlds.StarterPackage3D;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 using UnityEngine.Video;
 
 public class StartCutscene : MonoBehaviour
