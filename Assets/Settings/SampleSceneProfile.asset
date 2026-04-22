@@ -230,11 +230,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LiftGammaGain
   active: 1
   lift:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 0.91639215, z: 0.9497837, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.9954374, z: 0.99827737, w: -0.0000004844031}
   gain:
-    m_OverrideState: 0
-    m_Value: {x: 0.9850975, y: 0.97835654, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.99895453, z: 0.99937797, w: 1.9631491e-10}
