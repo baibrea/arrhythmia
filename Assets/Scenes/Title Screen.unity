@@ -176,7 +176,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unity Asset Store
+  m_text: 'Unity Asset Store
+
+    itch.io'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc48098a9d22c0e4682e3bf2b78a1dcf, type: 2}
   m_sharedMaterial: {fileID: 5421342903114222260, guid: dc48098a9d22c0e4682e3bf2b78a1dcf, type: 2}
@@ -3576,7 +3578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 768218519463978391, guid: 5bf6e1587b6d7a94097cb4a491ce7518, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1211267215654096570, guid: 5bf6e1587b6d7a94097cb4a491ce7518, type: 3}
       propertyPath: m_text
