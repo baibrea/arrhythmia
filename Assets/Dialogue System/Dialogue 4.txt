@@ -1,0 +1,1 @@
+[NAME=Player][SPEAKERSPRITE=Player]Collect keys to open certain doors.

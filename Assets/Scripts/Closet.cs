@@ -22,6 +22,9 @@ public class Closet : MonoBehaviour
     [SerializeField] private GameObject window;
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private MonsterPath monsterPath;
+    [SerializeField] private AudioSource playerAudio;
+    [SerializeField] private AudioClip startAudio;
+    [SerializeField] private AudioClip endAudio;
 
     [Header("Timing Displays")]
     [SerializeField] private Transform timingParent;
@@ -73,6 +76,7 @@ public class Closet : MonoBehaviour
                 playerSprite.enabled = false;
                 playerLight.enabled = false;
                 playerMove.toggleCloset(true);
+                playerAudio.PlayOneShot(startAudio);
                 heartbeat.stopRunning();
                 rhythmUI.SetActive(true);
                 game = true;
@@ -223,10 +227,11 @@ public class Closet : MonoBehaviour
         if (interact.WasPressedThisFrame() && !prompt.enabled && canInteract && insideTrigger)
         {
             StopAllCoroutines();
-            StartCoroutine(InteractCooldown(0.3f));
+            StartCoroutine(InteractCooldown(1f));
             prompt.enabled = true;
             playerSprite.enabled = true;
             playerLight.enabled = true;
+            playerAudio.PlayOneShot(endAudio);
             foreach (Transform child in notes)
             {
                 Destroy(child.gameObject);
