@@ -1,6 +1,9 @@
+using DigitalWorlds.StarterPackage3D;
 using System.Collections;
+using System.Threading;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -12,6 +15,10 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private CinemachineCamera cam;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip chaseMusic;
+    [SerializeField] private AudioClip transitionSound;
+    [SerializeField] private AudioClip exitSound;
+    [SerializeField] private Image screen;
+    [SerializeField] ChangeScene changeScene;
     private bool playing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,15 +33,17 @@ public class CutsceneManager : MonoBehaviour
 
     IEnumerator Cutscene()
     {
+        audioSource.PlayOneShot(transitionSound);
         playing = true;
-        audioSource.clip = chaseMusic;
-        audioSource.Play();
         heartbeat.stopRunning();
         monster.ForceStun(true);
         monster.ChangePositon(-13, 10);
         monster.AlertMonster();
         cam.Follow = monsterTransform;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        audioSource.clip = chaseMusic;
+        audioSource.Play();
+        yield return new WaitForSeconds(0.5f);
         cam.Follow = playerTransform;
         yield return new WaitForSeconds(0.5f);
         if (heartbeat.getBPM() < 100)
@@ -53,6 +62,26 @@ public class CutsceneManager : MonoBehaviour
     public void StopCutscene()
     {
         playing = false;
+        audioSource.Stop();
+        heartbeat.stopRunning();
+        monster.ForceStun(true);
+        audioSource.clip = exitSound;
+        audioSource.Play();
+        StartCoroutine(EndGame());
+    }
+
+    IEnumerator EndGame()
+    {
+        float duration = 2.5f;
+        float timer = duration;
+        while (timer > 0)
+        {
+            yield return null;
+            timer -= Time.deltaTime;
+            screen.color = new Color(1, 1, 1, 1f - (timer / duration));
+        }
+        yield return new WaitForSeconds(1.2f);
+        changeScene.LoadSceneByName("Title Screen");
     }
 
     // Update is called once per frame
