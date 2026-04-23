@@ -67,10 +67,12 @@ namespace DigitalWorlds.Dialogue
         private Coroutine scrollCoroutine;
         private bool isTyping = false;
         private bool cancelTyping = false;
+        private AudioSource audioSource;
 
         private void Start()
         {
             dialogueParent.SetActive(false);
+            audioSource = GetComponent<AudioSource>();
 
             foreach (var info in speakerLibrary.speakerList)
             {
@@ -184,6 +186,7 @@ namespace DigitalWorlds.Dialogue
             textBox.text = "";
             isTyping = true;
             cancelTyping = false;
+            audioSource.Play();
 
             while (isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
             {
@@ -199,6 +202,7 @@ namespace DigitalWorlds.Dialogue
             }
             isTyping = false;
             cancelTyping = false;
+            audioSource.Stop();
 
             yield return new WaitForSeconds(autoAdvanceDelay);
 
