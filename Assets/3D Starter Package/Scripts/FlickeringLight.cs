@@ -36,7 +36,14 @@ namespace DigitalWorlds.StarterPackage3D
             float noise = Mathf.PerlinNoise(randomSeed, Time.time * frequency);
 
             // Flicker the intensity using the noise value
-            m_light.intensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
+            if (Random.value > 0.8f) // 20% chance per update
+            {
+                m_light.intensity = minIntensity;
+            }
+            else
+            {
+                m_light.intensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
+            }
         }
     }
 }
