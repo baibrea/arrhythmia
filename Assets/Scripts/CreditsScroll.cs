@@ -20,11 +20,11 @@ public class CreditsScroll : MonoBehaviour
 
     IEnumerator Credits()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         echo.Play();
         title.SetActive(true);
         yield return new WaitForSeconds(2.5f);
-        float duration = 8f;
+        float duration = 12f;
         float timer = duration;
         echo.clip = song;
         echo.Play();
@@ -32,7 +32,7 @@ public class CreditsScroll : MonoBehaviour
         {
             yield return null;
             timer -= Time.deltaTime;
-            rect.localPosition = new Vector3(0, 1080f * (1 - timer / duration), 1);
+            rect.localPosition = new Vector3(0, 1700f * (1 - timer / duration), 1);
         }
     }
 }

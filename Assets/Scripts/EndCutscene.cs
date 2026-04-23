@@ -26,7 +26,7 @@ public class EndCutscene : MonoBehaviour
             vp.isLooping = false;
         } else if (counter == 3)
         {
-            changeScene.LoadSceneByName("Title Screen");
+            changeScene.LoadSceneByName("Credits");
         }
     }
 }
