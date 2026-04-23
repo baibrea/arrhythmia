@@ -34,19 +34,26 @@ public class LevelBuilder : MonoBehaviour
         // Hub
         grid.FillFloor(-21, 0, -6, 3);
         grid.SetTile(-10, 3, "wall");
+        grid.SetTile(-21, 2, "wall");
+        grid.SetTile(-21, 1, "wall");
+        grid.SetTile(-21, 3, "wall");
+        grid.SetTile(-15, 3, "wall");
+        grid.SetTile(-7, 3, "wall");
+        grid.SetTile(-6, 3, "wall");
+        grid.SetTile(-10, 3, "wall"); // Closet
 
         // Hallways
         grid.FillFloor(-19, 4, -18, 10);
         grid.FillFloor(-9, 4, -8, 10);
+        grid.SetTile(-9, 7, "wall");
+        grid.SetTile(-9, 8, "wall");
+
 
         // Final Hallway Doors
         grid.SetTile(-14, 4, "door");
         grid.SetTile(-13, 4, "door");
 
         // Hospital Level
-
-        // grid.FillFloor(-25, 11, -18, 17);
-        // grid.FillFloor(-28, 15, -23, 20);
 
         // Rooms for hospital level
         grid.FillFloor(-28, 11, -18, 12);
@@ -106,12 +113,6 @@ public class LevelBuilder : MonoBehaviour
 
         // Closet for hospital level
         grid.SetTile(-33, 18, "wall");
-
-        // Second Level
-        grid.FillFloor(-16, 11, -11, 20);
-
-        // Third Level
-        grid.FillFloor(-9, 11, -2, 18);
 
         // Screens Room
         grid.FillFloor(-9, 11, -2, 18); // Entry Room
