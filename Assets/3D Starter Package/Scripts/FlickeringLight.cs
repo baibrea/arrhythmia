@@ -35,15 +35,12 @@ namespace DigitalWorlds.StarterPackage3D
             // Perlin noise can be used to efficiently generate pseudo-random patterns of numbers
             float noise = Mathf.PerlinNoise(randomSeed, Time.time * frequency);
 
-            // Flicker the intensity using the noise value
-            if (Random.value > 0.8f) // 20% chance per update
-            {
-                m_light.intensity = minIntensity;
-            }
-            else
-            {
-                m_light.intensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
-            }
+            float baseIntensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
+
+            // small jitter
+            float jitter = Random.Range(-0.1f, 0.1f);
+
+            m_light.intensity = baseIntensity + jitter;
         }
     }
 }
