@@ -1,0 +1,1 @@
+[NAME=Player][SPEAKERSPRITE=Player]Use it wisely, you have a limited charge.

@@ -81,7 +81,7 @@ public class CutsceneManager : MonoBehaviour
             screen.color = new Color(1, 1, 1, 1f - (timer / duration));
         }
         yield return new WaitForSeconds(1.2f);
-        changeScene.LoadSceneByName("Title Screen");
+        changeScene.LoadSceneByName("Credits");
     }
 
     // Update is called once per frame

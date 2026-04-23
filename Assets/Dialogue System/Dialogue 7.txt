@@ -1,0 +1,2 @@
+[NAME=Player][SPEAKERSPRITE=Player]Press E when next to a closet to hide in it.
+[NAME=Player][SPEAKERSPRITE=Player]Play a little game to decrease your heart rate.

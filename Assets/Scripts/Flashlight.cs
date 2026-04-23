@@ -11,6 +11,9 @@ public class Flashlight : MonoBehaviour
     [SerializeField] private Sprite charge2;
     [SerializeField] private Sprite charge1;
     [SerializeField] private Sprite charge0;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip click;
+    [SerializeField] private AudioClip zap;
 
     private int charge = 3;
     private BoxCollider box;
@@ -34,6 +37,7 @@ public class Flashlight : MonoBehaviour
     {
         if (charge > 0)
         {
+            audioSource.PlayOneShot(click);
             box.enabled = true;
             flashlight.SetActive(true);
             animator.SetTrigger("Flash");
@@ -58,6 +62,7 @@ public class Flashlight : MonoBehaviour
     {
         charge = 3;
         batteryImage.sprite = charge3;
+        audioSource.PlayOneShot(zap);
     }
 
     public void End()
