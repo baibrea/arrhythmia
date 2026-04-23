@@ -29,6 +29,6 @@ public class Jumpscare : MonoBehaviour
     {
         Debug.Log("Jumpscare!");
         vp.Stop();
-        ChangeScene.LoadCurrentScene();
+        ChangeScene.LoadSceneByName("Title Screen");
     }
 }
