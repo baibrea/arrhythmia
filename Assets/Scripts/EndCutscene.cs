@@ -5,6 +5,7 @@ using UnityEngine.Video;
 public class EndCutscene : MonoBehaviour
 {
     [SerializeField] private VideoClip clip;
+    [SerializeField] private VideoClip clip2;
     private VideoPlayer vp;
     private ChangeScene changeScene;
     private int counter = 0;
@@ -24,7 +25,13 @@ public class EndCutscene : MonoBehaviour
             vp.playbackSpeed = 0.15f;
             vp.clip = clip;
             vp.isLooping = false;
+
         } else if (counter == 3)
+        {
+            vp.playbackSpeed = 0.3f;
+            vp.clip = clip2;
+            vp.Play();
+        } else if (counter == 4)
         {
             changeScene.LoadSceneByName("Credits");
         }
