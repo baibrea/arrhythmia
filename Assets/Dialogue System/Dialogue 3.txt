@@ -1,0 +1,2 @@
+[NAME=Player][SPEAKERSPRITE=Player]You can only move to this timing.
+[NAME=Player][SPEAKERSPRITE=Player]Don't miss a beat.
