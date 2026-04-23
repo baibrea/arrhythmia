@@ -253,6 +253,6 @@ public class HeartbeatUI : MonoBehaviour
 
     void PlayHeartbeatSound()
     {
-        sound.PlayOneShot(sound.clip, 2.5f);
+        sound.PlayOneShot(sound.clip, 2f);
     }
 }
