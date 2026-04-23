@@ -12,35 +12,31 @@ namespace DigitalWorlds.StarterPackage3D
     public class FlickeringLight : MonoBehaviour
     {
         [SerializeField] private Light m_light;
-        [SerializeField] private float minIntensity = 0.1f;
-        [SerializeField] private float maxIntensity = 1f;
         [SerializeField] private float frequency = 1f;
 
         private float randomSeed;
 
+        private float defaultIntensity;
+
         private void Start()
         {
-            // Generate a random number for use in the Perlin noise generator
+            if (m_light == null) m_light = GetComponent<Light>();
             randomSeed = Random.Range(0f, 65535f);
+
+            // Capture the intensity you set in the Inspector
+            defaultIntensity = m_light.intensity;
         }
 
         private void Update()
         {
-            // Return early if the light has not been assigned
-            if (m_light == null)
-            {
-                return;
-            }
+            if (m_light == null) return;
 
-            // Perlin noise can be used to efficiently generate pseudo-random patterns of numbers
             float noise = Mathf.PerlinNoise(randomSeed, Time.time * frequency);
 
-            float baseIntensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
+            // Flicker between 10% and 150% of the light's original brightness
+            float flickerFactor = Mathf.Lerp(0.1f, 1.5f, noise);
 
-            // small jitter
-            float jitter = Random.Range(-0.1f, 0.1f);
-
-            m_light.intensity = baseIntensity + jitter;
+            m_light.intensity = defaultIntensity * flickerFactor;
         }
     }
 }
